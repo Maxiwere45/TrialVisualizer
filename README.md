@@ -3,8 +3,7 @@
 # **TRIAL VISUALIZER**
 
 ![Language](https://img.shields.io/badge/Language-Python-0052cf)
-![Open Source](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)
-
+![Framework](https://img.shields.io/badge/Framework-Flask-yellow)
 ---
 
 ## TRIAL VISUALIZER permet de stocker les données collectées sous forme de publications et d’études cliniques sous forme de deux types (essais contrôlés randomisés et études observationnelles)
