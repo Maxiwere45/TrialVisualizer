@@ -4,8 +4,7 @@
     display: flex;
     flex-direction: row;
     height: 100vh;
-    background-color: #f2f2f2;
-    font-family: Arial, sans-serif;
+    background-color: black;
     font-size: 16px;
     color: #333;
     font-family: 'Poppins', sans-serif;
@@ -15,27 +14,31 @@
     display: flex;
     color: #eeeeee;
     flex-direction: column;
-    width: 200px;
+    width: 250px;
     background-color: black;
 }
 
 .dashboard-left a {
-    display: block;
+    display: flex;
     padding: 10px;
+    margin-left: 15px;
+    margin-right: 8px;
     text-decoration: none;
     color: white;
     font-weight: bold;
+    border-radius: 8px;
+    text-align: center;
 }
 
 .dashboard-left h3{
     color: whitesmoke;
     font-size: 20px;
     font-weight: bold;
-    margin-bottom: 25%;
+    margin: 10% 5% 25% 5%;
     padding-bottom: 10%;
     background-color: black;
     text-align: center;
-    border-bottom: #cccccc 1px solid;
+    border-bottom: #cccccc 3px solid;
 }
 
 .dashboard-left a:hover {
@@ -45,5 +48,33 @@
 
 .dashboard-content {
     flex: 1;
-    background-color: #377ba8;
+    background-color: aliceblue;
+    margin: 1%;
+    border-radius: 13px;
+}
+
+.clt {
+    display: inline-block;
+    width: 24px;
+    height: 24px;background-image: url('../others_ressources/trial.png');
+    margin-right: 8px;
+    background-size: cover;
+}
+
+.iconpub{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('../others_ressources/paper.png');
+    margin-right: 8px;
+    background-size: cover;
+}
+
+.iconabout{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('../others_ressources/info.png');
+    margin-right: 8px;
+    background-size: cover;
 }
