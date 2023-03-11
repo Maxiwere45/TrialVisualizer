@@ -26,7 +26,6 @@
     text-decoration: none;
     color: white;
     font-weight: bold;
-    border-radius: 8px;
     text-align: center;
 }
 
@@ -50,7 +49,6 @@
     flex: 1;
     background-color: aliceblue;
     margin: 1%;
-    border-radius: 13px;
 }
 
 .clt {
