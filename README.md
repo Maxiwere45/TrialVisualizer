@@ -10,7 +10,7 @@
 
 #### Entre autre nous avons une base sur mongoDB qui nous permet de stocker toutes ses données puis les utilisés à fin d'avoir un dashboard complet avec des filtres, reporting, overview...
 
-__Partant sur un fichier Excel contenant les données cliniques, les fonctionnalitées sont :__
+__Partant sur un fichier Excel contenant les données cliniques, les fonctionnalités sont :__
 
 * L'alimentation automatisée de la base de données 
     * Les affichages graphiques, de tableaux ou de tout autre type de représentation visuelle qui aide à comprendre les données de manière efficace.
