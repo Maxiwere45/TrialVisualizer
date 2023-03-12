@@ -2,3 +2,11 @@
 commands.txt
 venv
 /.idea/csv-editor.xml
+/.idea/.gitignore
+/.idea/discord.xml
+/.idea/sonarlint/issuestore/index.pb
+/.idea/sonarlint/securityhotspotstore/index.pb
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/TrialVisualizer.iml
