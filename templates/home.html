@@ -136,6 +136,7 @@
                                             <th>Title</th>
                                             <th>Abstract</th>
                                             <th>Phase</th>
+                                            <th>Type</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -152,6 +153,7 @@
                                             <th>Title</th>
                                             <th>Abstract</th>
                                             <th>Phase</th>
+                                            <th>Type</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -164,12 +166,13 @@
                                                 <td>{{ document['date'] }}</td>
                                                 <td><a href="{{ document['linkout'] }}" target="_blank">{{ document['linkout'] }}</a></td>
                                                 <td>{{ document['gender'] }}</td>
-                                                <td>{{ document['conditions'] }}</td>
+                                                <td>{% for element in document['conditions'] %}<code>{{ element }}</code> {% endfor %}</td>
                                                 <td>{{ document['interventions'] }}</td>
                                                 <td>{{ document['acronym'] }}</td>
                                                 <td>{{ document['title'] }}</td>
                                                 <td>{{ document['abstract'] }}</td>
                                                 <td>{{ document['phase'] }}</td>
+                                                <td>{{ document['trial_type'] }}</td>
                                             </tr>
                                         {% endfor %}
                                         {% block content %}{% endblock %}
