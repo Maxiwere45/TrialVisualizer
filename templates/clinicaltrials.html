@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Home</title>
+        <title>Clinical Trial</title>
         <link rel="icon" type="image/x-icon" href="../others_ressources/icon_logo.png">
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -119,98 +119,85 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Dashboard</h1>
+                        <h1 class="mt-4">Clinical Trials</h1>
                         <!--Séparateur-->
                         <div class="separator-breadcrumb border-top"></div>
                         <br>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Publications
+                                View
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>PMID</th>
+                                            <th>Registry</th>
                                             <th>Date inserted</th>
-                                            <th>Date Published</th>
+                                            <th>Date</th>
                                             <th>Link out</th>
+                                            <th>Gender</th>
+                                            <th>Conditions</th>
+                                            <th>Interventions</th>
+                                            <th>Acronym</th>
                                             <th>Title</th>
-                                            <th>Times Cited</th>
-                                            <th>Venue</th>
-                                            <th>Authors</th>
-                                            <th>Publisher</th>
-                                            <th>Year</th>
-                                            <th>Concepts</th>
-                                            <th>Mesh Terms</th>
-                                            <th>Doctype</th>
-                                            <th>Open Access</th>
-                                            <th>Publication type</th>
+                                            <th>Abstract</th>
+                                            <th>Phase</th>
+                                            <th>Type</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>ID</th>
-                                            <th>PMID</th>
+                                            <th>Registry</th>
                                             <th>Date inserted</th>
-                                            <th>Date Published</th>
+                                            <th>Date</th>
                                             <th>Link out</th>
+                                            <th>Gender</th>
+                                            <th>Conditions</th>
+                                            <th>Interventions</th>
+                                            <th>Acronym</th>
                                             <th>Title</th>
-                                            <th>Times Cited</th>
-                                            <th>Venue</th>
-                                            <th>Authors</th>
-                                            <th>Publisher</th>
-                                            <th>Year</th>
-                                            <th>Concepts</th>
-                                            <th>Mesh Terms</th>
-                                            <th>Doctype</th>
-                                            <th>Open Access</th>
-                                            <th>Publication type</th>
+                                            <th>Abstract</th>
+                                            <th>Phase</th>
+                                            <th>Type</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <!--CODE-->
-                                        {% for document in publications %}
+                                        {% for document in trials %}
                                             <tr>
                                                 <td>{{ document['id'] }}</td>
-                                                <td>{{ document['pmid'] }}</td>
+                                                <td>{{ document['registry'] }}</td>
                                                 <td>{{ document['dateInserted'] }}</td>
-                                                <td>{{ document['datePublished'] }}</td>
+                                                <td>{{ document['date'] }}</td>
                                                 <td><a href="{{ document['linkout'] }}" target="_blank">{{ document['linkout'] }}</a></td>
+                                                <td>{{ document['gender'] }}</td>
+                                                <td>{% for element in document['conditions'] %}<code>{{ element }}</code> {% endfor %}</td>
+                                                <td>{{ document['interventions'] }}</td>
+                                                <td>{{ document['acronym'] }}</td>
                                                 <td>{{ document['title'] }}</td>
-                                                <td>{{ document['timeCited'] }}</td>
-                                                <td>{{ document['venue'] }}</td>
-                                                <td>{% for element in document['authors'] %}<code>{{ element }}</code> {% endfor %}</td>
-                                                <td>{{ document['publisher'] }}</td>
-                                                <td>{{ document['year'] }}</td>
-                                                <td>{% for element in document['concepts'] %}<code>{{ element }}</code> {% endfor %}</td>
-                                                <td>{{ document['meshTerms'] }}</td>
-                                                <td>{{ document['doctype'] }}</td>
-                                                <td>{{ document['openAcces'] }}</td>
-                                                <td>{{ document['p_type'] }}</td>
+                                                <td>{{ document['abstract'] }}</td>
+                                                <td>{{ document['phase'] }}</td>
+                                                <td>{{ document['trial_type'] }}</td>
                                             </tr>
                                         {% endfor %}
                                         {% block content %}{% endblock %}
                                         <!--CODE-->
                                         <tr>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     </tbody>
                                 </table>

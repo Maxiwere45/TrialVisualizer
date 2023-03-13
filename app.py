@@ -28,11 +28,30 @@ def create_app(test_config=None):
     @app.route('/')
     def index():
         trials = db.get_trial()
-        return render_template('home.html',app=app,trials=trials)
+        return render_template(
+            'home.html',
+            app=app,
+            trials=trials,
+            publications=db.get_publication()
+        )
 
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
+    @app.route('/clt')
+    def clinical_trial_page():
+        trials = db.get_trial()
+        return render_template(
+            'clinicaltrials.html',
+            app=app,
+            trials=trials
+        )
+
+    @app.route('/pub')
+    def publications_page():
+        publications = db.get_publication()
+        return render_template(
+            'publications.html',
+            app=app,
+            publications=publications
+        )
 
     import db
     db.init_app(app)

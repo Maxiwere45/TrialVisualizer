@@ -17,23 +17,23 @@ def get_trial():
     return list(db['ClinicalTrials'].find().limit(1300).sort('id', pymongo.DESCENDING))
 def get_trial_obstudies():
     db = get_db()
-    return list(db['ClinicalTrials'].find({'trial_type': 'cl_obstudies'}))
+    return list(db['ClinicalTrials'].find({'trial_type': 'cl_obstudies'}).limit(1300))
 
 def get_trial_randtrials():
     db = get_db()
-    return list(db['ClinicalTrials'].find({'trial_type': 'cl_randtrials'}))
+    return list(db['ClinicalTrials'].find({'trial_type': 'cl_randtrials'}).limit(1300))
 
 def get_publication():
     db = get_db()
-    return list(db['Publications'].find())
+    return list(db['Publications'].find().limit(1300))
 
 def get_publication_obstudies():
     db = get_db()
-    return list(db['Publications'].find({'p_type': 'p_obstudies'}))
+    return list(db['Publications'].find({'p_type': 'p_obstudies'}).limit(1300))
 
 def get_publication_randtrials():
     db = get_db()
-    return list(db['Publications'].find({'p_type': 'p_randtrials'}))
+    return list(db['Publications'].find({'p_type': 'p_randtrials'}).limit(1300))
 
 def init_db():
     mdp = hashlib.sha256("9dfe351b".encode()).hexdigest()

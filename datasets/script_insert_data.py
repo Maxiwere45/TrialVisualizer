@@ -136,10 +136,10 @@ print("Insertion des données dans la base de données...")
 # NE PAS DE-COMMENTER, LES DONNNES SONT DEJA INSERE
 ClinicalTrials.insert_many(c_trial_obstudies) # SUCCESS
 ClinicalTrials.insert_many(c_trial_randtrials) # SUCCESS
-
+"""
 Publications.insert_many(pub_obstudies) # SUCCESS
 Publications.insert_many(pub_randtrials) # SUCCESS
-"""
+
 
 print("Insertion des données terminée !")
 print("\t> Nombre de ClinicalTrials : ", ClinicalTrials.count_documents({}))
