@@ -10,3 +10,4 @@ venv
 /.idea/modules.xml
 /.idea/inspectionProfiles/profiles_settings.xml
 /.idea/TrialVisualizer.iml
+/.idea/dataSources.xml

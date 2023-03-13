@@ -11,6 +11,30 @@ def get_db():
         g.db = client['trial_visualizer']
     return g.db
 
+
+def get_trial():
+    db = get_db()
+    return list(db['ClinicalTrials'].find())
+def get_trial_obstudies():
+    db = get_db()
+    return list(db['ClinicalTrials'].find({'trial_type': 'cl_obstudies'}))
+
+def get_trial_randtrials():
+    db = get_db()
+    return list(db['ClinicalTrials'].find({'trial_type': 'cl_randtrials'}))
+
+def get_publication():
+    db = get_db()
+    return list(db['Publications'].find())
+
+def get_publication_obstudies():
+    db = get_db()
+    return list(db['Publications'].find({'p_type': 'p_obstudies'}))
+
+def get_publication_randtrials():
+    db = get_db()
+    return list(db['Publications'].find({'p_type': 'p_randtrials'}))
+
 def init_db():
     mdp = hashlib.sha256("9dfe351b".encode()).hexdigest()
     dbname = "trial_visualizer"

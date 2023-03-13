@@ -27,7 +27,8 @@ def create_app(test_config=None):
     # a simple page that says hello
     @app.route('/')
     def index():
-        return render_template('home.html')
+        trials = db.get_trial_randtrials()
+        return render_template('home.html',app=app,trials=trials)
 
     @app.route('/hello')
     def hello():
