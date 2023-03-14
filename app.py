@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 
 
 def create_app(test_config=None):
@@ -52,6 +52,10 @@ def create_app(test_config=None):
             app=app,
             publications=publications
         )
+
+    @app.route('/chart1')
+    def ma_liste():
+        return jsonify(db.get_phase())
 
     import db
     db.init_app(app)

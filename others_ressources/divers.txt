@@ -23,6 +23,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <title>{% block title %}{% endblock %} - Trial Visualizer</title>

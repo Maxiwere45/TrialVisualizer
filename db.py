@@ -35,6 +35,20 @@ def get_publication_randtrials():
     db = get_db()
     return list(db['Publications'].find({'p_type': 'p_randtrials'}).limit(1300))
 
+# Nombre d'essais en phase 1 / 2 / 3 / 4
+def get_phase():
+    db = get_db()
+    return list(db['ClinicalTrials'].aggregate([
+        {
+            "$group": {
+                "_id": "$phase",
+                "count": {
+                    "$sum": 1
+                }
+            }
+        }
+    ]))
+
 def init_db():
     mdp = hashlib.sha256("9dfe351b".encode()).hexdigest()
     dbname = "trial_visualizer"
@@ -57,6 +71,7 @@ def close_db(e=None):
     db = g.pop('db', None)
     if db is not None:
         db.client.close()
+
 
 def init_app(app):
     app.teardown_appcontext(close_db)

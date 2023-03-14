@@ -123,98 +123,18 @@
                         <!--Séparateur-->
                         <div class="separator-breadcrumb border-top"></div>
                         <br>
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                Publications
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-bar me-1"></i>
+                                        Bar Chart Example
+                                    </div>
+                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="50"></canvas></div>
+                                    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>PMID</th>
-                                            <th>Date inserted</th>
-                                            <th>Date Published</th>
-                                            <th>Link out</th>
-                                            <th>Title</th>
-                                            <th>Times Cited</th>
-                                            <th>Venue</th>
-                                            <th>Authors</th>
-                                            <th>Publisher</th>
-                                            <th>Year</th>
-                                            <th>Concepts</th>
-                                            <th>Mesh Terms</th>
-                                            <th>Doctype</th>
-                                            <th>Open Access</th>
-                                            <th>Publication type</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>PMID</th>
-                                            <th>Date inserted</th>
-                                            <th>Date Published</th>
-                                            <th>Link out</th>
-                                            <th>Title</th>
-                                            <th>Times Cited</th>
-                                            <th>Venue</th>
-                                            <th>Authors</th>
-                                            <th>Publisher</th>
-                                            <th>Year</th>
-                                            <th>Concepts</th>
-                                            <th>Mesh Terms</th>
-                                            <th>Doctype</th>
-                                            <th>Open Access</th>
-                                            <th>Publication type</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <!--CODE-->
-                                        {% for document in publications %}
-                                            <tr>
-                                                <td>{{ document['id'] }}</td>
-                                                <td>{{ document['pmid'] }}</td>
-                                                <td>{{ document['dateInserted'] }}</td>
-                                                <td>{{ document['datePublished'] }}</td>
-                                                <td><a href="{{ document['linkout'] }}" target="_blank">{{ document['linkout'] }}</a></td>
-                                                <td>{{ document['title'] }}</td>
-                                                <td>{{ document['timeCited'] }}</td>
-                                                <td>{{ document['venue'] }}</td>
-                                                <td>{% for element in document['authors'] %}<code>{{ element }}</code> {% endfor %}</td>
-                                                <td>{{ document['publisher'] }}</td>
-                                                <td>{{ document['year'] }}</td>
-                                                <td>{% for element in document['concepts'] %}<code>{{ element }}</code> {% endfor %}</td>
-                                                <td>{{ document['meshTerms'] }}</td>
-                                                <td>{{ document['doctype'] }}</td>
-                                                <td>{{ document['openAcces'] }}</td>
-                                                <td>{{ document['p_type'] }}</td>
-                                            </tr>
-                                        {% endfor %}
-                                        {% block content %}{% endblock %}
-                                        <!--CODE-->
-                                        <tr>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <!--Possibilité de rajouter un graphique-->
                         </div>
                     </div>
                 </main>

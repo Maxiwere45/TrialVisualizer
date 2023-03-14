@@ -1,3 +1,9 @@
+
+let dataExtracted = null;
+fetch('/chart1')
+      .then(response => response.json())
+      .then(data => {dataExtracted = data});
+
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#292b2c';
@@ -6,6 +12,20 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 var ctx = document.getElementById("myBarChart");
 var myLineChart = new Chart(ctx, {
   type: 'bar',
+    data: {
+        labels: Object.keys(dataExtracted),
+    datasets: [{
+          // TODO
+      /*
+      
+       */
+        label: "Essai",
+      backgroundColor: "rgba(2,117,216,1)",
+      borderColor: "rgba(2,117,216,1)",
+        data: Object.values(dataExtracted),
+    }],
+    },
+  /*
   data: {
     labels: ["January", "February", "March", "April", "May", "June"],
     datasets: [{
@@ -14,7 +34,7 @@ var myLineChart = new Chart(ctx, {
       borderColor: "rgba(2,117,216,1)",
       data: [4215, 5312, 6251, 7841, 9821, 14984],
     }],
-  },
+  }, */
   options: {
     scales: {
       xAxes: [{

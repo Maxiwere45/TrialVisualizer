@@ -1,5 +1,6 @@
 import csv
 import ast
+import pymongo
 import connect
 from datetime import datetime
 
@@ -20,6 +21,7 @@ with open('./data_extracted/C_obstudies.csv', 'r') as f:
             interventions = ast.literal_eval(interventions_string)
             c_trial_obstudies[i]['interventions'] = interventions
 
+
         # Conversion de la chaine de caractère sur [conditions] en liste de string
         data_conditions = c_trial_obstudies[i]['conditions']
         if len(data_conditions) > 0:
@@ -29,10 +31,11 @@ with open('./data_extracted/C_obstudies.csv', 'r') as f:
         # Autres modifications
         c_trial_obstudies[i]['trial_type'] = "cl_obstudies"
         dateP = datetime.strptime(c_trial_obstudies[i]['dateInserted'], '%m/%d/%Y').date()
-        c_trial_obstudies[i]['dateInserted'] = dateP.strftime('%m/%d/%Y')
+        c_trial_obstudies[i]['dateInserted'] = dateP.strftime('%Y-%m-%d')
         if len(c_trial_obstudies[i]['date']) > 0:
             dateF = datetime.strptime(c_trial_obstudies[i]['date'], '%m/%d/%Y').date()
-            c_trial_obstudies[i]['date'] = dateF.strftime('%m/%d/%Y')
+            c_trial_obstudies[i]['date'] = dateF.strftime('%Y-%m-%d')
+
 
 with open('./data_extracted/C_randTrials.csv', 'r') as f:
     lecteur_csv = csv.DictReader(f)
@@ -53,10 +56,10 @@ with open('./data_extracted/C_randTrials.csv', 'r') as f:
         try:
             if len(c_trial_randtrials[i]['dateInserted']) > 0:
                 dateP = datetime.strptime(c_trial_randtrials[i]['dateInserted'], '%m/%d/%Y').date()
-                c_trial_randtrials[i]['dateInserted'] = dateP.strftime('%m/%d/%Y')
+                c_trial_randtrials[i]['dateInserted'] = dateP.strftime('%Y-%m-%d')
             if len(c_trial_randtrials[i]['date']) > 0:
                 dateF = datetime.strptime(c_trial_randtrials[i]['date'], '%m/%d/%Y').date()
-                c_trial_randtrials[i]['date'] = dateF.strftime('%m/%d/%Y')
+                c_trial_randtrials[i]['date'] = dateF.strftime('%Y-%m-%d')
         except ValueError:
             continue
 
@@ -87,11 +90,11 @@ with open('./data_extracted/P_obstudies.csv', 'r') as f:
         try:
             if len(pub_obstudies[i]['dateInserted']) > 0:
                 dateP = datetime.strptime(pub_obstudies[i]['dateInserted'], '%m/%d/%Y').date()
-                pub_obstudies[i]['dateInserted'] = dateP.strftime('%m/%d/%Y')
+                pub_obstudies[i]['dateInserted'] = dateP.strftime('%Y-%m-%d')
 
             if len(pub_obstudies[i]['datePublished']) > 0:
                 dateF = datetime.strptime(pub_obstudies[i]['datePublished'], '%m/%d/%Y').date()
-                pub_obstudies[i]['datePublished'] = dateF.strftime('%m/%d/%Y')
+                pub_obstudies[i]['datePublished'] = dateF.strftime('%Y-%m-%d')
         except ValueError:
             continue
 
@@ -122,18 +125,19 @@ with open('./data_extracted/P_randTrials.csv', 'r') as f:
             pub_randtrials[i]['year'] = int(pub_randtrials[i]['year'])
             if len(pub_randtrials[i]['dateInserted']) > 0:
                 dateP = datetime.strptime(pub_randtrials[i]['dateInserted'], '%m/%d/%Y').date()
-                pub_randtrials[i]['dateInserted'] = dateP.strftime('%m/%d/%Y')
+                pub_randtrials[i]['dateInserted'] = dateP.strftime('%Y-%m-%d')
 
             if len(pub_randtrials[i]['datePublished']) > 0:
                 dateF = datetime.strptime(pub_randtrials[i]['datePublished'], '%m/%d/%Y').date()
-                pub_randtrials[i]['datePublished'] = dateF.strftime('%m/%d/%Y')
+                pub_randtrials[i]['datePublished'] = dateF.strftime('%Y-%m-%d')
         except ValueError:
             continue
 
 # Insérer les données dans la base de données
 print("Insertion des données dans la base de données...")
+
+# NE PAS DE-COMMENTER, LES DONNES SONT DEJA INSERE
 """
-# NE PAS DE-COMMENTER, LES DONNNES SONT DEJA INSERE
 ClinicalTrials.insert_many(c_trial_obstudies) # SUCCESS
 ClinicalTrials.insert_many(c_trial_randtrials) # SUCCESS
 """
