@@ -14,7 +14,7 @@ def get_db():
 
 def get_trial():
     db = get_db()
-    return list(db['ClinicalTrials'].find().limit(1300).sort('id', pymongo.DESCENDING))
+    return list(db['ClinicalTrials'].find().limit(1300))
 def get_trial_obstudies():
     db = get_db()
     return list(db['ClinicalTrials'].find({'trial_type': 'cl_obstudies'}).limit(1300))
