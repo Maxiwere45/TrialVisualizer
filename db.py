@@ -3,6 +3,7 @@ import hashlib
 import pymongo
 import click
 from flask import current_app, g
+import script_doi_extract as DOI_SEARCH
 
 MONGO_URI = 'mongodb+srv://nrm4206a:9dfe351b@dbsae.ohuhcxc.mongodb.net/?retryWrites=true&w=majority'
 def get_db():
@@ -10,7 +11,6 @@ def get_db():
         client = pymongo.MongoClient(MONGO_URI)
         g.db = client['trial_visualizer']
     return g.db
-
 
 def get_trial():
     db = get_db()

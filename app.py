@@ -59,6 +59,10 @@ def create_app(test_config=None):
             publications=publications
         )
 
+    @app.route('/chart1')
+    def ma_liste():
+        return jsonify(db.get_phase())
+
     @app.route('/doi-search')
     def doi_search():
         return render_template(
@@ -66,15 +70,11 @@ def create_app(test_config=None):
             app=app
         )
 
-    @app.route('/chart1')
-    def ma_liste():
-        return jsonify(db.get_phase())
-
-    @app.route('/doi-search')
+    @app.route('/doi-get-data')
     def doi_res():
+        # Récupérer les données de l'API CrossRef
         param = str(request.args.get('q'))
         result = DOI_SEARCH.get_doi(param)
-        print(result)
         return jsonify(result)
 
     db.init_app(app)

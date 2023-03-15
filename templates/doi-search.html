@@ -57,11 +57,11 @@
                                 Publications
                             </a>
                             <div class="sb-sidenav-menu-heading">Report</div>
-                            <a class="nav-link" href=""> <!-- todo -->
+                            <a class="nav-link" href="">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-chart-bar"></i></div>
                                 Statistiques
                             </a>
-                            <a class="nav-link" href=""> <!-- todo -->
+                            <a class="nav-link" href="">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-brackets-curly"></i></div>
                                 Recherche DOI
                             </a>
@@ -134,16 +134,16 @@
                         <div class="separator-breadcrumb border-top"></div>
                         <br>
                         <!-- Barre de recherche -->
-                        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                            <div class="input-group">
+                        <form class="d-none d-md-inline-block form-inline mb-auto me-0 me-md-3 my-2 my-md-0">
+                            <div class="input-group" id="ingdoi">
                                 <input class="form-control" type="text" placeholder="Recherche DOI" aria-label="Search for..." aria-describedby="btnNavbarSearch" id="searchInputDOI"/>
-                                <button class="btn btn-primary" id="btnSearchDoi" onclick="envoyerRequete()" type="button"><i class="fas fa-search"></i></button>
+                                <button class="btn btn-primary" id="btnSearchDoi" type="button"><i class="fas fa-search"></i></button>
                             </div>
                         </form>
                         <!-- resultats -->
                         <div class="card mb-4">
                             <div class="card-body" id="result-doi">
-                                <code id="result-doi-text"></code>
+                                <pre id="result-doi-text"></pre>
                             </div>
                         </div>
 

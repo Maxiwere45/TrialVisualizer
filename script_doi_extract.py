@@ -4,11 +4,7 @@ import json
 # URL de base pour l'API CrossRef
 base_url = "https://api.crossref.org/works/"
 
-# DOI à rechercher
-doi = "10.1101/2020.05.24.20111823"
-
-
-def get_doi(url_doi: str):
+def get_doi(url_doi: str) -> str:
     # Construire l'URL pour la requête CrossRef
     url = base_url + url_doi
 
@@ -24,3 +20,5 @@ def get_doi(url_doi: str):
             return f"Erreur {response.status_code} lors de la requête CrossRef."
     except IndexError:
         return "DOI non trouvé."
+
+

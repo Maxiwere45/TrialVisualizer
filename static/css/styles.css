@@ -2518,6 +2518,12 @@ textarea.form-control-lg {
   align-items: stretch;
   width: 100%;
 }
+
+#ingdoi{
+  padding-bottom: 10px;
+}
+
+
 .input-group > .form-control, .input-group > .datatable-input,
 .input-group > .form-select,
 .input-group > .datatable-selector,
@@ -7696,6 +7702,7 @@ textarea.form-control-lg {
 .mb-4 {
   margin-bottom: 1.5rem !important;
 }
+
 
 .mb-5 {
   margin-bottom: 3rem !important;

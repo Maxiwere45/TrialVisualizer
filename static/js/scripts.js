@@ -1,33 +1,30 @@
 // 
 // Scripts
-// 
 
-var monBouton = document.getElementById("btnSearchDoi");
+let monBouton = document.getElementById("btnSearchDoi");
+if (monBouton != null) {
+    // Ajoute un événement de clic au bouton
+    monBouton.onclick = function() {
+        // Récupère l'élément HTML de l'input
+        let input = document.getElementById("searchInputDOI");
 
-// Ajoute un événement de clic au bouton
-monBouton.onclick = function() {
-    // Récupère l'élément HTML de l'input
-    var input = document.getElementById("searchInputDOI");
+        // Récupère le contenu de l'input
+        let contenuInput = input.value;
+        let resultat = document.getElementById("result-doi-text");
 
-    // Récupère le contenu de l'input
-    var contenuInput = input.value;
+        // Construit le lien avec le paramètre de recherche
+        let lienRequete = "/doi-get-data?q=" + encodeURIComponent(contenuInput);
 
-    // Construit le lien avec le paramètre de recherche
-    var lienRequete = "/doi-search?q=" + encodeURIComponent(contenuInput);
-    // REVOIR
-    setTimeout(function() {
-        fetch('/doi-search')
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
+        // Requête AJAX
+        setTimeout(function() {
+            fetch(lienRequete)
+                .then(response => response.json())
+                .then(data => {
+                    resultat.innerHTML = JSON.stringify(data, null, 2);
+                    console.log(data);
         });
-    }, 1500);
-};
-
-function envoyerRequete() {
-
-
-
+        }, 1500);
+    };
 }
 
 window.addEventListener('DOMContentLoaded', event => {

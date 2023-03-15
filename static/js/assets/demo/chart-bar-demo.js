@@ -28,8 +28,8 @@ window.onload = function() {
                 datasets: [{
                     axis: 'y',
                     label: "Essai",
-                    backgroundColor: "rgb(5,0,157)",
-                    borderColor: "rgb(0,8,152)",
+                    backgroundColor: "rgb(35,31,236)",
+                    borderColor: "rgb(2,0,77)",
                     data: y,
                 }]
             },
