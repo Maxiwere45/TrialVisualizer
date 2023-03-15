@@ -46,7 +46,8 @@ def get_phase():
                     "$sum": 1
                 }
             }
-        }
+        },
+        { "$sort": { "count": -1 } }
     ]))
 
 def init_db():

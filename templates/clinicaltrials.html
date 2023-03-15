@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Clinical Trial</title>
+        <title>Essais cliniques</title>
         <link rel="icon" type="image/x-icon" href="../others_ressources/icon_logo.png">
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -50,11 +50,16 @@
                             </a>
                             <a class="nav-link" href="{{ url_for('clinical_trial_page') }}">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-notes-medical"></i></div>
-                                Clinical Trials
+                                Essais cliniques
                             </a>
                             <a class="nav-link" href="{{ url_for('publications_page') }}">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-file"></i></div>
                                 Publications
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Report</div>
+                            <a class="nav-link" href="">
+                                <div class="sb-nav-link-icon"><i class="fa-sharp fa-solid fa-magnifying-glass-chart"></i></div>
+                                Analytiques
                             </a>
                             <div class="sb-sidenav-menu-heading">Interface</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -119,19 +124,19 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Clinical Trials</h1>
+                        <h1 class="mt-4">Essais cliniques</h1>
                         <!--Séparateur-->
                         <div class="separator-breadcrumb border-top"></div>
                         <br>
                         <div class="card mb-4">
                             <div class="card-body">
-                                All <strong>clinical trials</strong> are listed below. You can filter the results by entering a keyword in the search bar.
+                                Tous les <strong>essais cliniques</strong> sont affichés ci-dessous. Vous pouvez filtrer les essais cliniques en fonction de leurs conditions, de leurs interventions et de leurs phases.
                             </div>
                         </div>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                View
+                                Vue d'ensemble
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">

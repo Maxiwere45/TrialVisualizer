@@ -1,5 +1,9 @@
+import datetime
 import os
-from flask import Flask, render_template, jsonify
+import db
+import auth
+import script_doi_extract as DOI_SEARCH
+from flask import Flask, render_template, jsonify, request
 
 
 def create_app(test_config=None):
@@ -28,9 +32,11 @@ def create_app(test_config=None):
     @app.route('/')
     def index():
         trials = db.get_trial()
+        heure_actuelle = datetime.datetime.now().time()
         return render_template(
             'home.html',
             app=app,
+            tnow=heure_actuelle.strftime("%H:%M"),
             trials=trials,
             publications=db.get_publication()
         )
@@ -53,14 +59,25 @@ def create_app(test_config=None):
             publications=publications
         )
 
+    @app.route('/doi-search')
+    def doi_search():
+        return render_template(
+            'doi-search.html',
+            app=app
+        )
+
     @app.route('/chart1')
     def ma_liste():
         return jsonify(db.get_phase())
 
-    import db
-    db.init_app(app)
+    @app.route('/doi-search')
+    def doi_res():
+        param = str(request.args.get('q'))
+        result = DOI_SEARCH.get_doi(param)
+        print(result)
+        return jsonify(result)
 
-    import auth
+    db.init_app(app)
     app.register_blueprint(auth.bp)
 
     return app
