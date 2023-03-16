@@ -1,6 +1,6 @@
 let x = [];
 let y = [];
-fetch('/chart1')
+fetch('/chart-nb-phase')
     .then(response => response.json())
     .then(data => {
         const labels = data.map(row => row._id);

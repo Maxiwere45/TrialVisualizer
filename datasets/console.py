@@ -9,11 +9,11 @@ clinicaltrials = db['ClinicalTrials']
 publications = db['Publications']
 
 
+"""
 val1 = list(publications.find({'authors':'N/A'},{'_id':0,'id':1,'doi':1}))
 print("Ajout des auteurs aux publications...")
 print("Nombre de publications à traiter : " + str(len(val1)))
 print("Ceci peut prendre quelques minutes...")
-"""
 x = len(val1)
 for i in val1:
     metadata = DOI_SEARCH.get_doi(i['doi'])
@@ -45,4 +45,4 @@ val = clinicaltrials.aggregate([{
         }
 }])
 
-# print(list(val1))
+print(list(val))

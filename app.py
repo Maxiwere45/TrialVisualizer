@@ -50,6 +50,13 @@ def create_app(test_config=None):
             trials=trials
         )
 
+    @app.route('/doi-search')
+    def doi_search():
+        return render_template(
+            'doi-search.html',
+            app=app
+        )
+
     @app.route('/pub')
     def publications_page():
         publications = db.get_publication()
@@ -59,16 +66,10 @@ def create_app(test_config=None):
             publications=publications
         )
 
-    @app.route('/chart1')
+    # Request GET
+    @app.route('/chart-nb-phase')
     def ma_liste():
         return jsonify(db.get_phase())
-
-    @app.route('/doi-search')
-    def doi_search():
-        return render_template(
-            'doi-search.html',
-            app=app
-        )
 
     @app.route('/doi-get-data')
     def doi_res():
