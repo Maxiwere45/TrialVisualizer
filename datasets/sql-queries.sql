@@ -65,3 +65,26 @@ db.ClinicalTrials.aggregate([
 db.ClinicalTrials.find({
    "interventions.arm_group_labels": /Drug/i
 });
+
+// Groupement des essais selon les interventions (colonne intervention), en particulier ceux avec un arm_group_label = Drug
+db.ClinicalTrials.aggregate([
+  {
+    $unwind: "$interventions"
+  },
+  {
+    $match: {
+      "interventions.type": "Drug"
+    }
+  },
+  {
+    $group: {
+      _id: "$interventions.name",
+      count: { $sum: 1 }
+    }
+  },
+  {
+    $sort: {
+      count: -1
+    }
+  }
+]);
