@@ -60,11 +60,7 @@ def create_app(test_config=None):
     @app.route('/pub')
     def publications_page():
         publications = db.get_publication()
-        return render_template(
-            'publications.html',
-            app=app,
-            publications=publications
-        )
+        return render_template('publications.html',app=app,publications=publications)
 
     # Request GET
     @app.route('/chart-nb-phase')
@@ -77,6 +73,10 @@ def create_app(test_config=None):
         param = str(request.args.get('q'))
         result = DOI_SEARCH.get_doi(param)
         return jsonify(result)
+
+    @app.route('/stats')
+    def stats():
+        return render_template('statistics.html', app=app)
 
     db.init_app(app)
     app.register_blueprint(auth.bp)

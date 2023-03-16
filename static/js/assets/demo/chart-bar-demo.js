@@ -28,9 +28,9 @@ window.onload = function() {
                 datasets: [{
                     axis: 'y',
                     label: "Essai",
-                    backgroundColor: "rgb(6,2,183)",
-                    borderColor: "rgb(2,0,77)",
-                    data: y,
+                    backgroundColor: "rgb(255,179,23)",
+                    borderColor: "rgb(0,0,0)",
+                    data: y
                 }]
             },
             options: {
@@ -40,14 +40,14 @@ window.onload = function() {
                             display: true
                         },
                         ticks: {
-                            maxTicksLimit: 6
+                            maxTicksLimit: 10
                         }
                     }],
                     yAxes: [{
                         ticks: {
                             min: 0,
-                            max: 1000,
-                            maxTicksLimit: 5
+                            max: 1100,
+                            maxTicksLimit: 10
                         },
                         gridLines: {
                             display: true
@@ -59,6 +59,6 @@ window.onload = function() {
                 },maxBarThickness: 50 // number (pixels) or 'flex'
             }
         });
-    }, 1500);};
+    }, 5500);};
 
 
