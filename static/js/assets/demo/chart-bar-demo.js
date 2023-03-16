@@ -28,7 +28,7 @@ window.onload = function() {
                 datasets: [{
                     axis: 'y',
                     label: "Essai",
-                    backgroundColor: "rgb(35,31,236)",
+                    backgroundColor: "rgb(6,2,183)",
                     borderColor: "rgb(2,0,77)",
                     data: y,
                 }]

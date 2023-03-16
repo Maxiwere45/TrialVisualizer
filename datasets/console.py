@@ -45,4 +45,25 @@ val = clinicaltrials.aggregate([{
         }
 }])
 
-print(list(val))
+result = list(val)
+
+print(result)
+
+
+# [{'_id': 'Retrospective study', 'count': 21},
+#  {'_id': 'Phase 0', 'count': 90},
+#  {'_id': 'New Treatment Measure Clinical Study', 'count': 1},
+#  {'_id': 'N/A', 'count': 996},
+#  {'_id': '', 'count': 64},
+#  {'_id': 'Phase 3', 'count': 389},
+#  {'_id': 'Phase 1/2', 'count': 85},
+#  {'_id': 'Phase 4', 'count': 155},
+#  {'_id': 'Phase 2', 'count': 430},
+#  {'_id': 'Phase 1', 'count': 90},
+#  {'_id': 'Phase 2/3', 'count': 139}]
+
+"""
+Voici une liste contenant des dictionnaires : [{'_id': 'Retrospective study', 'count': 21}, {'_id': 'Phase 0', 'count': 81}, {'_id': 'New Treatment Measure Clinical Study', 'count': 1}, {'_id': '2', 'count': 1}, {'_id': '4', 'count': 3}, {'_id': 'N/A', 'count': 996}, {'_id': '', 'count': 64}, {'_id': 'Phase 3', 'count': 389}, {'_id': 'Phase 1/2', 'count': 85}, {'_id': 'Phase 4', 'count': 152}, {'_id': 'Phase 2', 'count': 429}, {'_id': '0', 'count': 8}, {'_id': 'Phase 1', 'count': 90}, {'_id': 'Phase 2/3', 'count': 139}] 
+Comme tu peux le remarquer, certaines colonnes de '_id' sont similaires (ex. 'Phase 2' et '2'). écris un script python qui va fusionner les doublons en renommant les valeurs des '_id' (ex. 'Phase 2' et '2' -> 'Phase 2') et en fusionnant leurs colonne 'counts'. Le résultat attendu devrai être de cette forme
+ : 
+"""
