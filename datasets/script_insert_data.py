@@ -6,7 +6,7 @@ from datetime import datetime
 
 # Connection à la base de données MongoDB
 db = connect.client['trial_visualizer']
-ClinicalTrials= db['ClinicalTrials']
+ClinicalTrials = db['ClinicalTrials']
 Publications = db['Publications']
 
 ## EXTRACTION DES DONNEES DES FICHIERS CSV ET TRANSFORMATION
@@ -21,7 +21,6 @@ with open('./data_extracted/C_obstudies.csv', 'r') as f:
             interventions = ast.literal_eval(interventions_string)
             c_trial_obstudies[i]['interventions'] = interventions
 
-
         # Conversion de la chaine de caractère sur [conditions] en liste de string
         data_conditions = c_trial_obstudies[i]['conditions']
         if len(data_conditions) > 0:
@@ -35,7 +34,6 @@ with open('./data_extracted/C_obstudies.csv', 'r') as f:
         if len(c_trial_obstudies[i]['date']) > 0:
             dateF = datetime.strptime(c_trial_obstudies[i]['date'], '%m/%d/%Y').date()
             c_trial_obstudies[i]['date'] = dateF.strftime('%Y-%m-%d')
-
 
 with open('./data_extracted/C_randTrials.csv', 'r') as f:
     lecteur_csv = csv.DictReader(f)
@@ -141,9 +139,8 @@ print("Insertion des données dans la base de données...")
 ClinicalTrials.insert_many(c_trial_obstudies) # SUCCESS
 ClinicalTrials.insert_many(c_trial_randtrials) # SUCCESS
 """
-Publications.insert_many(pub_obstudies) # SUCCESS
-Publications.insert_many(pub_randtrials) # SUCCESS
-
+Publications.insert_many(pub_obstudies)  # SUCCESS
+Publications.insert_many(pub_randtrials)  # SUCCESS
 
 print("Insertion des données terminée !")
 print("\t> Nombre de ClinicalTrials : ", ClinicalTrials.count_documents({}))

@@ -130,7 +130,7 @@
                         <br>
                         <div class="card mb-4">
                             <div class="card-body">
-                                Toutes les <strong>publications</strong> sont affichées ci-dessous. Vous pouvez filtrer les résultats en utilisant les filtres ci-dessous et la recherche.
+                                Toutes les <strong>publications</strong> sont affichées ci-dessous. Vous pouvez filtrer les résultats en utilisant les filtres du tableau et la recherche.
                             </div>
                         </div>
                         <div class="card mb-4">
@@ -201,7 +201,7 @@
                                                 <td>{% for element in document['concepts'] %}<code>{{ element }}</code> {% endfor %}</td>
                                                 <td>{{ document['meshTerms'] }}</td>
                                                 <td>{{ document['doctype'] }}</td>
-                                                <td>{{ document['openAcces'] }}</td>
+                                                <td>{% for element in document['openAccess'] %}<code>{{ element }}</code> {% endfor %}</td>
                                                 <td>{{ document['p_type'] }}</td>
                                             </tr>
                                         {% endfor %}
