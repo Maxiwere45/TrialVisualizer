@@ -169,6 +169,7 @@
                                             <th>Link out</th>
                                             <th>Title</th>
                                             <th>Times Cited</th>
+                                            <th>Altmetric</th>
                                             <th>Venue</th>
                                             <th>Authors</th>
                                             <th>Publisher</th>
@@ -191,6 +192,7 @@
                                                 <td><a href="{{ document['linkout'] }}" target="_blank">{{ document['linkout'] }}</a></td>
                                                 <td>{{ document['title'] }}</td>
                                                 <td>{{ document['timeCited'] }}</td>
+                                                <td>{{ document['altmetric'] }}</td>
                                                 <td>{{ document['venue'] }}</td>
                                                 <td>{% for element in document['authors'] %}<code>{{ element }}</code> {% endfor %}</td>
                                                 <td>{{ document['publisher'] }}</td>
@@ -205,6 +207,7 @@
                                         {% block content %}{% endblock %}
                                         <!--CODE-->
                                         <tr>
+                                            <th></th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
