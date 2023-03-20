@@ -36,7 +36,7 @@ def get_publication_randtrials():
     return list(db['Publications'].find({'p_type': 'p_randtrials'}).limit(1300))
 
 # Nombre d'essais en phase 1 / 2 / 3 / 4
-def get_phase():
+def get_phase_by_nb():
     db = get_db()
     return list(db['ClinicalTrials'].aggregate([
         {
@@ -50,24 +50,6 @@ def get_phase():
         { "$sort": { "count": -1 } }
     ]))
 
-def init_db():
-    mdp = hashlib.sha256("9dfe351b".encode()).hexdigest()
-    dbname = "trial_visualizer"
-    client = pymongo.MongoClient(MONGO_URI)
-    db = client[dbname]
-    myCol = db["users"]
-    x = myCol.insert_one({"username": "nrm4206a","password": mdp})
-    if "users" in db.list_collection_names():
-        print("Collection crée !")
-    else:
-        print("Collection non crée !")
-
-    if x.inserted_id:
-        print("Insertion réussie !")
-    else:
-        print("Insertion non réussie !")
-    client.close()
-
 def close_db(e=None):
     db = g.pop('db', None)
     if db is not None:
@@ -76,9 +58,3 @@ def close_db(e=None):
 
 def init_app(app):
     app.teardown_appcontext(close_db)
-    app.cli.add_command(init_db_command)
-
-@click.command('init-db')
-def init_db_command():
-    init_db()
-    click.echo('Initialized the database.')
