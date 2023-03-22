@@ -59,13 +59,6 @@ def close_db(e=None):
 def init_app(app):
     app.teardown_appcontext(close_db)
 
-def get_total_pub():
-    db = get_db()
-    return list(db['ClinicalTrials'].find({$and:[{'p_type':'p_obstudies'},{'p_type':'p_randtrials'}}]).count());
-
-def get_total_essais():
-    db = get_db()
-    return list(db['Publications'].find({$and:[{'p_type': 'p_obstudies'}, {'p_type': 'p_randtrials'}}]).count());
 
 def get_total_esais_fem():
     db = get_db()
