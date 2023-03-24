@@ -79,3 +79,15 @@ def create_app(test_config=None):
     db.init_app(app)
     app.register_blueprint(auth.bp)
     return app
+
+    @app.route('/')
+    def nb_trials():
+        return request(db.get_total_essais)
+
+    @app.route('/')
+    def nb_trials_fem():
+        return request(db.get_total_esais_fem)
+
+    @app.route('/')
+    def nb_trials_male():
+        return request(db.get_total_esais_male)
