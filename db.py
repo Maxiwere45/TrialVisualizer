@@ -74,4 +74,4 @@ def get_total_pub():
 
 def get_total_essais():
     db = get_db()
-    return db['Publications'].count_documents({'$and':[{'p_type': 'p_obstudies'}, {'p_type': 'p_randtrials'}]});
+    return db['Publications'].count();
