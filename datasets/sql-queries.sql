@@ -66,7 +66,8 @@ db.ClinicalTrials.find({
    "interventions.arm_group_labels": /Drug/i
 });
 
-// Groupement des essais selon les interventions (colonne intervention), en particulier ceux avec un arm_group_label = Drug
+// Groupement des essais selon les interventions (colonne intervention),
+    -- en particulier ceux avec un arm_group_label = Drug
 db.ClinicalTrials.aggregate([
   {
     $unwind: "$interventions"
