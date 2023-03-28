@@ -1,6 +1,4 @@
-import json
 import pymongo
-import script_doi_extract as DOI_SEARCH
 
 MONGO_URI = 'mongodb+srv://nrm4206a:9dfe351b@dbsae.ohuhcxc.mongodb.net/?retryWrites=true&w=majority'
 client = pymongo.MongoClient(MONGO_URI)
@@ -36,15 +34,5 @@ print("Traitement terminé !")
 """
 
 # Nombre d'essais en phase 1 / 2 / 3 / 4
-val = clinicaltrials.aggregate([{
-        "$group": {
-            "_id": "$phase",
-            "count": {
-                "$sum": 1
-            }
-        }
-}])
 
-result = list(val)
-
-print(result)
+print(len(list(db['ClinicalTrials'].find({'gender':'Male'}))))

@@ -1,9 +1,5 @@
-import hashlib
-
 import pymongo
-import click
-from flask import current_app, g
-import script_doi_extract as DOI_SEARCH
+from flask import g
 
 MONGO_URI = 'mongodb+srv://nrm4206a:9dfe351b@dbsae.ohuhcxc.mongodb.net/?retryWrites=true&w=majority'
 def get_db():
@@ -59,19 +55,20 @@ def close_db(e=None):
 def init_app(app):
     app.teardown_appcontext(close_db)
 
+def get_total_essais():
+    db = get_db()
+    return len(list(db['ClinicalTrials'].find()))
 
 def get_total_esais_fem():
     db = get_db()
-    return list(db['ClinicalTrials'].find({'gender':'female'}).count())
+    return len(list(db['ClinicalTrials'].find({'gender': 'Female'})))
 
 def get_total_esais_male():
     db = get_db()
-    return list(db['ClinicalTrials'].find({'gender':'male'}).count())
+    return len(list(db['ClinicalTrials'].find({'gender':'Male'})))
 
 def get_total_pub():
     db = get_db()
     return db['ClinicalTrials'].count_documents({'$and':[{'p_type':'p_obstudies'},{'p_type':'p_randtrials'}]})
 
-def get_total_essais():
-    db = get_db()
-    return db['Publications'].count();
+

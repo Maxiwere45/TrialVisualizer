@@ -41,10 +41,16 @@ def create_app(test_config=None):
     @app.route('/clt')
     def clinical_trial_page():
         trials = db.get_trial()
+        women = db.get_total_esais_fem()
+        men = db.get_total_esais_male()
+        allg = db.get_total_essais()
         return render_template(
             'clinicaltrials.html',
             app=app,
-            trials=trials
+            trials=trials,
+            women = women,
+            men = men,
+            allg = allg
         )
 
     @app.route('/doi-search')
@@ -79,7 +85,7 @@ def create_app(test_config=None):
     db.init_app(app)
     app.register_blueprint(auth.bp)
     return app
-
+"""
     @app.route('/')
     def nb_trials():
         return request(db.get_total_essais)
@@ -91,3 +97,4 @@ def create_app(test_config=None):
     @app.route('/')
     def nb_trials_male():
         return request(db.get_total_esais_male)
+"""
