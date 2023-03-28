@@ -142,15 +142,12 @@
                                 <input class="form-control" type="text" placeholder="Recherche" aria-label="Search for..." aria-describedby="btnNavbarSearch" id="searchInputDOI"/>
                                 <button class="btn btn-primary" id="btnSearchDoi" type="button"><i class="fas fa-search"></i></button>
                             </div>
-                            <select class="form-select" aria-label="Default select example" id="selectSearchDoi">
-                                <option value="doi">DOI</option>
-                                <option value="pmid">PMID</option>
-                                <option value="pmcid">PMCID</option>
-                                <option value="pmc">PMC</option>
-                                <option value="pmc">PM</option>
+                            <select class="form-select" aria-label="Selection" id="selectSearch">
+                                <option value="invermectin">Essais cliniques</option>
+                                <option value="pmid">Publications</option>
                             </select>
                         </form>
-
+                        <p id="error-doi"></p>
                         <!-- resultats -->
                         <div class="card mb-4">
                             <div class="card-body" id="result-doi">

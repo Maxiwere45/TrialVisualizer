@@ -2,6 +2,8 @@ import pymongo
 from flask import g
 
 MONGO_URI = 'mongodb+srv://nrm4206a:9dfe351b@dbsae.ohuhcxc.mongodb.net/?retryWrites=true&w=majority'
+
+
 def get_db():
     if 'db' not in g:
         client = pymongo.MongoClient(MONGO_URI)
