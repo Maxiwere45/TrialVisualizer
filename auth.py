@@ -1,21 +1,21 @@
 import functools
 import hashlib
-
+from Database import Database
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
-from db import get_db
+
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
+dataBase = Database()
+db = dataBase.get_db()
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        db = get_db()
         error = None
-
         if not username:
             error = 'Username is required.'
         elif not password:
@@ -36,7 +36,6 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = hashlib.sha256(request.form['password'].encode()).hexdigest()
-        db = get_db()
         error = None
 
         cursor = db.users.find({'username': username, 'password': password}).limit(1)
@@ -56,7 +55,7 @@ def load_logged_in_user():
     if user_id is None:
         g.user = None
     else:
-        g.user = get_db()['users'].find({'username': user_id}).limit(1)
+        g.user = db['users'].find({'username': user_id}).limit(1)
 
 @bp.route('/logout')
 def logout():
