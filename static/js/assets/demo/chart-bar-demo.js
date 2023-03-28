@@ -20,16 +20,16 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 // Bar Chart Example
 window.onload = function() {
     setTimeout(function() {
-        var ctx = document.getElementById("myBarChart");
-        var myLineChart = new Chart(ctx, {
+        const ctx = document.getElementById("myBarChart");
+        const myLineChart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: x,
                 datasets: [{
                     axis: 'y',
                     label: "Essai",
-                    backgroundColor: "rgb(255,179,23)",
-                    borderColor: "rgb(0,0,0)",
+                    backgroundColor: "rgb(0,35,175)",
+                    borderColor: "rgb(0,8,152)",
                     data: y
                 }]
             },
@@ -56,9 +56,10 @@ window.onload = function() {
                 },
                 legend: {
                     display: false
-                },maxBarThickness: 50 // number (pixels) or 'flex'
+                }, maxBarThickness: 50 // number (pixels) or 'flex'
             }
         });
-    }, 5500);};
+    }, 1500);
+};
 
 

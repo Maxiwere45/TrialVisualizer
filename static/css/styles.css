@@ -347,7 +347,7 @@ th {
   max-width: 250px; /* limite la largeur de la cellule à 200 pixels */
   white-space: nowrap; /* empêche le contenu de se diviser en plusieurs lignes */
   overflow: hidden; /* cache le contenu qui dépasse la limite de la cellule */
-  text-overflow: ellipsis; /* ajoute des points de suspension pour indiquer qu'il y a du contenu en trop */
+  text-overflow: unset;  /* ajoute des points de suspension pour indiquer qu'il y a du contenu en trop */
 }
 
 label {

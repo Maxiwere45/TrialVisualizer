@@ -65,3 +65,60 @@ db.ClinicalTrials.aggregate([
 db.ClinicalTrials.find({
    "interventions.arm_group_labels": /Drug/i
 });
+
+// Groupement des essais selon les interventions (colonne intervention), en particulier ceux avec un arm_group_label = Drug
+db.ClinicalTrials.aggregate([
+  {
+    $unwind: "$interventions"
+  },
+  {
+    $match: {
+      "interventions.type": "Drug"
+    }
+  },
+  {
+    $group: {
+      _id: "$interventions.name",
+      count: { $sum: 1 }
+    }
+  },
+  {
+    $sort: {
+      count: -1
+    }
+  }
+]);
+
+
+
+// Recherche d'Ivermectin dans les essais
+db.ClinicalTrials.find({ "interventions.name": { $regex: /ivermectin/i } })
+
+// Recherche d'Ivermectin dans les publications
+db.Publications.find({ $or: [
+  { "title": { $regex: /ivermectin/i } },
+  { "abstract": { $regex: /ivermectin/i } },
+  { "concepts": { $regex: /ivermectin/i } },
+  { "meshTerms": { $regex: /ivermectin/i } }
+] })
+
+// Publications du mois courant (ex mai 2020)
+// triées par score altmetric décroissant et
+// départagées par citations décroissantes
+db.Publications.aggregate([{
+    $match: {
+        datePublished: {
+        $gte: '2020-05-01',
+        $lt: '2020-06-01'
+        },
+        doctype: {
+            $ne: 'preprint'
+        }
+    }},
+    {
+        $sort: {
+            altmetric: -1,
+            timesCited: -1
+        }
+    }]);
+

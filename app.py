@@ -31,14 +31,11 @@ def create_app(test_config=None):
     # a simple page that says hello
     @app.route('/')
     def index():
-        trials = db.get_trial()
         heure_actuelle = datetime.datetime.now().time()
         return render_template(
             'home.html',
             app=app,
-            tnow=heure_actuelle.strftime("%H:%M"),
-            trials=trials,
-            publications=db.get_publication()
+            tnow=heure_actuelle.strftime("%H:%M")
         )
 
     @app.route('/clt')
@@ -65,7 +62,7 @@ def create_app(test_config=None):
     # Request GET
     @app.route('/chart-nb-phase')
     def ma_liste():
-        return jsonify(db.get_phase())
+        return jsonify(db.get_phase_by_nb())
 
     @app.route('/doi-get-data')
     def doi_res():
@@ -76,9 +73,21 @@ def create_app(test_config=None):
 
     @app.route('/stats')
     def stats():
-        return render_template('statistics.html', app=app)
+        tnow = datetime.datetime.now().time()
+        return render_template('statistics.html', app=app, tnow=tnow.strftime("%H:%M"))
 
     db.init_app(app)
     app.register_blueprint(auth.bp)
-
     return app
+
+    @app.route('/')
+    def nb_trials():
+        return request(db.get_total_essais)
+
+    @app.route('/')
+    def nb_trials_fem():
+        return request(db.get_total_esais_fem)
+
+    @app.route('/')
+    def nb_trials_male():
+        return request(db.get_total_esais_male)
