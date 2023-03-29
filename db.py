@@ -85,3 +85,12 @@ def get_total_esais_male():
 def get_total_pub():
     db = get_db()
     return db['ClinicalTrials'].count_documents({'$and': [{'p_type': 'p_obstudies'}, {'p_type': 'p_randtrials'}]})
+
+def get_total_pub_essais():
+    db = get_db()
+    return len(list(db['Publications'].count_documents({'p_type':'p_randtrials'})))
+
+def get_total_pub_essais():
+    db = get_db()
+    return len(list(db['Publications'].count_documents({'p_type':'p_obstudies'})))
+
