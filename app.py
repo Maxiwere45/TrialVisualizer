@@ -100,3 +100,11 @@ def create_app(test_config=None):
     return app
 
 
+    @app.route('/concept')
+    def conceptDet():
+        tnow = datetime.datetime.now().time()
+        return render_template(
+            'ConceptFrequent.html', app=app, tnow=tnow.strftime("%H:%M")
+        )
+
+
