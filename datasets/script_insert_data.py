@@ -11,7 +11,7 @@ Publications = db['Publications']
 
 ## EXTRACTION DES DONNEES DES FICHIERS CSV ET TRANSFORMATION
 # ESSAIS CLINIQUE
-with open('./data_extracted/C_obstudies.csv', 'r') as f:
+with open('./data_extracted/C_obstudies.csv', 'r',encoding='utf-8') as f:
     lecteur_csv = csv.DictReader(f)
     c_trial_obstudies = [dict(ligne) for ligne in lecteur_csv]
     for i in range(len(c_trial_obstudies)):
@@ -35,7 +35,7 @@ with open('./data_extracted/C_obstudies.csv', 'r') as f:
             dateF = datetime.strptime(c_trial_obstudies[i]['date'], '%m/%d/%Y').date()
             c_trial_obstudies[i]['date'] = dateF.strftime('%Y-%m-%d')
 
-with open('./data_extracted/C_randTrials.csv', 'r') as f:
+with open('./data_extracted/C_randTrials.csv', 'r',encoding='utf-8') as f:
     lecteur_csv = csv.DictReader(f)
     c_trial_randtrials = [dict(ligne) for ligne in lecteur_csv]
     for i in range(len(c_trial_randtrials)):
@@ -135,13 +135,13 @@ with open('./data_extracted/P_randTrials.csv', 'r') as f:
 print("Insertion des données dans la base de données...")
 
 # NE PAS DE-COMMENTER, LES DONNES SONT DEJA INSERE
-"""
+
 ClinicalTrials.insert_many(c_trial_obstudies) # SUCCESS
 ClinicalTrials.insert_many(c_trial_randtrials) # SUCCESS
 """
 Publications.insert_many(pub_obstudies)  # SUCCESS
 Publications.insert_many(pub_randtrials)  # SUCCESS
-
+"""
 print("Insertion des données terminée !")
 print("\t> Nombre de ClinicalTrials : ", ClinicalTrials.count_documents({}))
 print("\t> Nombre de publications : ", Publications.count_documents({}))

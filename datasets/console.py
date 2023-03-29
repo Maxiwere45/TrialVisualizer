@@ -33,23 +33,15 @@ for i in val1:
 print("Traitement terminé !")
 """
 
-# Nombre d'essais en phase 1 / 2 / 3 / 4
 
-pipeline = [
-    {
-        "$group": {
-            "_id": "$gender",
-            "count": {"$sum": 1}
-        }
-    }
-]
-result = list(db.ClinicalTrials.aggregate([
-    {
-        "$group": {
-            "_id": "$gender",
-            "count": {"$sum": 1}
-        }
-    }
-]))
-for r in result:
-    print(r["_id"], r["count"])
+
+unique_ids = publications.distinct("id")
+
+# Suppression des doublons
+for uid in unique_ids:
+    docs = list(publications.find({"id": uid}))
+    if len(docs) > 1:
+        docs_to_delete = docs[1:]
+        for doc in docs_to_delete:
+            publications.delete_one({"_id": doc["_id"]})
+            print("Suppression de la publication " + doc["id"] + " effectuée !")

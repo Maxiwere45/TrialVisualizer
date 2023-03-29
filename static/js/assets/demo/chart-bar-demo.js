@@ -43,7 +43,7 @@ window.onload = function() {
                             display: true
                         },
                         ticks: {
-                            maxTicksLimit: 10
+                            maxTicksLimit: 20
                         }
                     }],
                     yAxes: [{

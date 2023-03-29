@@ -1,259 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Publications</title>
-        <link rel="icon" type="image/x-icon" href="../others_ressources/icon_logo.png">
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <link href="../static/css/styles.css" rel="stylesheet"/>
-    </head>
-    <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="home.html">Trial Visualizer</a>
-            <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
-            <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Activity Log</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
+<div class="row">
+        <!-- 1st card -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card">
+                <div class="card-header">Details</div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">ID: test</li>
+                        <li class="list-group-item">Registry: test</li>
+                        <li class="list-group-item">Date inserted: test</li>
+                        <li class="list-group-item">Date published: test</li>
+                        <li class="list-group-item">Linkout: test</li>
+                        <li class="list-group-item">Gender: test</li>
+                        <li class="list-group-item">Phase: test</li>
+                        <li class="list-group-item">Acronym: test</li>
                     </ul>
-                </li>
-            </ul>
-        </nav>
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Principale</div>
-                            <a class="nav-link" href="{{ url_for('index') }}">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
-                                Tableau de bord
-                            </a>
-                            <a class="nav-link" href="{{ url_for('clinical_trial_page') }}">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-notes-medical"></i></div>
-                                Essais cliniques
-                            </a>
-                            <a class="nav-link" href="{{ url_for('publications_page') }}">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-file"></i></div>
-                                Publications
-                            </a>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-chart-bar"></i></div>
-                                Statistiques
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{ url_for('stats_clt') }}">Essais cliniques</a>
-                                    <a class="nav-link" href="{{ url_for('stats_pub') }}">Publications</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link" href="{{ url_for('doi_search') }}">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-magnifying-glass-arrow-right"></i></div>
-                                Recherche DOI
-                            </a>
-
-                            <div class="sb-sidenav-menu-heading">Autre</div>
-                            <a class="nav-link" href="{{ url_for('import_page') }}">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-file-csv"></i></div>
-                                Importer des données
-                            </a>
-                            <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Graphiques
-                            </a>
-                            <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tableaux de données brutes
-                            </a>
-                        </div>
-                    </div>
-                    <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Amdjad Anrifou
-                    </div>
-                </nav>
-            </div>
-            <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                        <h1 class="mt-4">Publications</h1>
-                        <!--Séparateur-->
-                        <div class="separator-breadcrumb border-top"></div>
-                     <!-- Entires data Card Example -->
-                    <br>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header">Total publications</div>
-                                <div class="card-body">
-                                <h5 class="card-title">{{ total_pub }}</h5>
-                                </div>
-                            </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-header">Publications des essais d'observations</div>
-                                    <div class="card-body">
-                                    <h5 class="card-title">{{ total_obs }}</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card">
-                                <div class="card-header">Publications sur les essais randomisés</div>
-                                <div class="card-body">
-                                <h5 class="card-title">{{ total_rand }}</h5>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <br>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                Toutes les <strong>publications</strong> sont affichées ci-dessous. Vous pouvez filtrer les résultats en utilisant les filtres du tableau et la recherche.
-                            </div>
-                        </div>
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                Vue
-                            </div>
-                            <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>PMID</th>
-                                            <th>Date inserted</th>
-                                            <th>Date Published</th>
-                                            <th>Link out</th>
-                                            <th>Title</th>
-                                            <th>Times Cited</th>
-                                            <th>Altmetric</th>
-                                            <th>Venue</th>
-                                            <th>Authors</th>
-                                            <th>Publisher</th>
-                                            <th>Year</th>
-                                            <th>Concepts</th>
-                                            <th>Mesh Terms</th>
-                                            <th>Doctype</th>
-                                            <th>Open Access</th>
-                                            <th>Publication type</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>PMID</th>
-                                            <th>Date inserted</th>
-                                            <th>Date Published</th>
-                                            <th>Link out</th>
-                                            <th>Title</th>
-                                            <th>Times Cited</th>
-                                            <th>Altmetric</th>
-                                            <th>Venue</th>
-                                            <th>Authors</th>
-                                            <th>Publisher</th>
-                                            <th>Year</th>
-                                            <th>Concepts</th>
-                                            <th>Mesh Terms</th>
-                                            <th>Doctype</th>
-                                            <th>Open Access</th>
-                                            <th>Publication type</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <!--CODE-->
-                                        {% for document in publications %}
-                                            <tr>
-                                                <td>{{ document['id'] }}</td>
-                                                <td>{{ document['pmid'] }}</td>
-                                                <td>{{ document['dateInserted'] }}</td>
-                                                <td>{{ document['datePublished'] }}</td>
-                                                <td><a href="{{ document['linkout'] }}" target="_blank">{{ document['linkout'] }}</a></td>
-                                                <td>{{ document['title'] }}</td>
-                                                <td>{{ document['timesCited'] }}</td>
-                                                <td>{{ document['altmetric'] }}</td>
-                                                <td>{{ document['venue'] }}</td>
-                                                <td>{% for element in document['authors'] %}<code>{{ element }}</code> {% endfor %}</td>
-                                                <td>{{ document['publisher'] }}</td>
-                                                <td>{{ document['year'] }}</td>
-                                                <td>{% for element in document['concepts'] %}<code>{{ element }}</code> {% endfor %}</td>
-                                                <td>{{ document['meshTerms'] }}</td>
-                                                <td>{{ document['doctype'] }}</td>
-                                                <td>{% for element in document['openAccess'] %}<code>{{ element }}</code> {% endfor %}</td>
-                                                <td>{{ document['p_type'] }}</td>
-                                            </tr>
-                                        {% endfor %}
-                                        {% block content %}{% endblock %}
-                                        <!--CODE-->
-                                        <tr>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Trial Visualizer 2023</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
+                </div>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="../static/js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="../static/js/scripts.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="../static/js/datatables-simple-demo.js"></script>
-    </body>
-</html>
+        <!-- 2nd card -->
+        <div><p></p></div>
+        <div class="col-md-6 col-lg-4">
+            <div class="card">
+                <div class="card-header">Card 2</div>
+                <div class="card-body">
+                    <h5 class="card-title">Title: test</h5>
+                </div>
+            </div>
+        </div>
+        <!-- 3rd card -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card">
+                <div class="card-header">Card 3</div>
+                <div class="card-body">
+                    <p class="card-text">Abstract: test</p>
+                </div>
+            </div>
+        </div>
+        <div class="w-100"><p></p></div>
+        <!-- 4th card -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card">
+                <div class="card-header">Card 4</div>
+                <div class="card-body">
+                    <p class="card-text">Intervention: test</p>
+                </div>
+            </div>
+        </div>
+        <!-- 5th card -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card">
+                <div class="card-header">Card 5</div>
+                <div class="card-body">
+                    <p class="card-text">Conditions: test</p>
+                </div>
+            </div>
+        </div>
+    </div>
