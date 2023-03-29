@@ -95,16 +95,13 @@ def create_app(test_config=None):
         tnow = datetime.datetime.now().time()
         return render_template('statistics.html', app=app, tnow=tnow.strftime("%H:%M"))
 
+
+    # Les fonctions doivent être déclarées avant ce bloc #
     db.init_app(app)
     app.register_blueprint(auth.bp)
     return app
 
 
-    @app.route('/concept')
-    def conceptDet():
-        tnow = datetime.datetime.now().time()
-        return render_template(
-            'ConceptFrequent.html', app=app, tnow=tnow.strftime("%H:%M")
-        )
+
 
 
