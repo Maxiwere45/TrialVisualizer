@@ -109,7 +109,8 @@
                         </div>
                         <!--Formulaire pour importer un fichier-->
                         <form action="{{ url_for('import_data') }}" method="POST" enctype="multipart/form-data">
-                            <select class="form-control" id="select-type">
+                            <label for="select-type">Sélectionner le type de données à importer :</label>
+                            <select class="form-control" id="select-type" name="select-type">
                               <option value="randtrial">Clinical trial randtrial</option>
                               <option value="obstudies">Clinical trial obstudies</option>
                               <option value="Randtrial">Publications randtrial</option>

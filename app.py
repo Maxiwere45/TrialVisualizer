@@ -71,6 +71,14 @@ def create_app(test_config=None):
     def import_data():
         # Récupérer le fichier CSV envoyé via le formulaire
         file_csv = request.files['file']
+
+        # Recupérer le type sélectionné dans le formulaire
+        type_data = request.form['select-type']
+
+        # Vérifier que le fichier est bien un CSV
+        if not file_csv.filename.endswith('.csv'):
+            return 'Le fichier n\'est pas un CSV !'
+
         # Lire le contenu du fichier avec pandas
         df = pd.read_csv(file_csv.stream)
         # Faire quelque chose avec le dataframe (par exemple, afficher les 10 premières lignes)
