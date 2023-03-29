@@ -94,3 +94,14 @@ def get_total_pub_essais_obs():
     db = get_db()
     return db['Publications'].count_documents({'p_type': 'p_obstudies'})
 
+def get_top_concepts_by_publication_count(year):
+  pipeline = [
+    { "$unwind": "$concepts" },
+    { "$group": {"_id": "$concepts", "count": {"$sum": 1}}},
+    { "$match": {"openAccess": {"$not": {"$regex": "green_sub"}}}},
+    { "$match": {"year" : year}},
+    { "$sort": {"count": -1}},
+    { "$limit": 20 }
+  ]
+  return list(db['Publications'].aggregate(pipeline))
+

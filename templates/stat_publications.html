@@ -102,7 +102,41 @@
                         <div class="separator-breadcrumb border-top"></div>
                         <br>
                         <!--AFFICHAGES DES DONNEES ICI-->
-                    </div>
+                        <!--Affichage du tableau-->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Vue
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>Concept</th>
+                                            <th>Nb</th>
+                                        </tr>
+                                    </thead>
+                                     <tbody>
+                                        <!--CODE-->
+                                        //faire une fonction de la fonction get_top_concepts_by_publication_count
+                                        {% for document in publications %}
+                                            <tr>
+                                                <td>{{ document[''] }}</td>
+                                                <td>{{ document[''] }}</td>
+
+                                            </tr>
+                                        {% endfor %}
+                                        {% block content %}{% endblock %}
+                                        <!--CODE-->
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                        <!--Afficher un graphe pie chart-->
+
+
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
