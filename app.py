@@ -4,6 +4,8 @@ import auth
 import db
 import script_doi_extract as DOI_SEARCH
 from flask import Flask, render_template, jsonify, request
+from flask import request
+import pandas as pd
 
 
 def create_app(test_config=None):
@@ -63,7 +65,18 @@ def create_app(test_config=None):
 
     @app.route('/import')
     def import_page():
-        return 0  # render_template('import_data.html', app=app)
+        return render_template('import_data.html', app=app)
+
+    @app.route('/import-data', methods=['POST'])
+    def import_data():
+        # Récupérer le fichier CSV envoyé via le formulaire
+        file_csv = request.files['file']
+        # Lire le contenu du fichier avec pandas
+        df = pd.read_csv(file_csv.stream)
+        # Faire quelque chose avec le dataframe (par exemple, afficher les 10 premières lignes)
+        print(df.head(10))
+        # Retourner une réponse (par exemple, une page HTML qui confirme l'importation)
+        return '<h1>Fichier importé avec succès !</h1>'
 
     @app.route('/pub')
     def publications_page():
