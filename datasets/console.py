@@ -35,4 +35,21 @@ print("Traitement terminé !")
 
 # Nombre d'essais en phase 1 / 2 / 3 / 4
 
-print(len(list(db['ClinicalTrials'].find({'gender':'Male'}))))
+pipeline = [
+    {
+        "$group": {
+            "_id": "$gender",
+            "count": {"$sum": 1}
+        }
+    }
+]
+result = list(db.ClinicalTrials.aggregate([
+    {
+        "$group": {
+            "_id": "$gender",
+            "count": {"$sum": 1}
+        }
+    }
+]))
+for r in result:
+    print(r["_id"], r["count"])

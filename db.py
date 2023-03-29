@@ -113,3 +113,14 @@ def get_total_articles()->int:
 def get_total_preprints()->int:
     db = get_db()
     return len(list(db['Publications'].find({'doctype': 'preprint'})))
+
+## STATISTIQUES ESSAIS CLINIQUES
+def get_gender_stats():
+    db = get_db()
+    return list(db.ClinicalTrials.aggregate([
+        {"$group":
+             {"_id": "$gender",
+              "count": {"$sum": 1}
+              }
+        }
+    ]))

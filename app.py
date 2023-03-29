@@ -96,7 +96,7 @@ def create_app(test_config=None):
 
     # Request GET
     @app.route('/chart-nb-phase')
-    def ma_liste():
+    def get_nb_phase():
         return jsonify(db.get_phase_by_nb())
 
     @app.route('/doi-get-data')
@@ -113,6 +113,11 @@ def create_app(test_config=None):
     @app.route('/stats_clt')
     def stats_clt():
         return render_template('stat_clinical_trial.html', app=app)
+
+    ## STATISTIQUES ESSAIS CLINIQUES
+    @app.route('/statcltgender')
+    def get_stat_clt_gender():
+        return jsonify(db.get_gender_stats())
 
     # Les fonctions doivent être déclarées avant ce bloc
     db.init_app(app)

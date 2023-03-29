@@ -98,10 +98,28 @@
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Statistiques des essais cliniques</h1>
-                        <!--Séparateur-->
-                        <div class="separator-breadcrumb border-top"></div>
-                        <br>
-                        <!--AFFICHAGES DES DONNEES ICI-->
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="{{ url_for('index') }}" style="text-decoration: none">Tableau de bord</a></li>
+                            <li class="breadcrumb-item active">Statistiques des essais cliniques</li>
+                        </ol>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                Page de statistiques des essais cliniques
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card" style="width: 25rem;">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-pie me-1"></i>
+                                        Proportions des individus sur les essais cliniques
+                                    </div>
+                                    <div class="card-body" style="height: 200px;">
+                                        <canvas id="myPieChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
@@ -123,7 +141,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="../static/js/assets/demo/chart-bar-demo.js"></script>
         <script src="../static/js/scripts.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="../static/js/datatables-simple-demo.js"></script>
+        <script src="../static/js/assets/demo/chart-pie-demo.js"></script>
+
     </body>
 </html>
