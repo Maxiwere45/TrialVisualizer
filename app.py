@@ -111,11 +111,21 @@ def create_app(test_config=None):
         result = DOI_SEARCH.get_doi(param)
         return jsonify(result)
 
+    @app.route('/stats_pub')
+    def stats_pub():
+        return render_template('stat_publications.html', app=app)
+
+    @app.route('/stats_clt')
+    def stats_clt():
+        return render_template('stat_clinical_trial.html', app=app)
+
+
+    """
     @app.route('/stats')
     def stats():
         tnow = datetime.datetime.now().time()
         return render_template('statistics.html', app=app, tnow=tnow.strftime("%H:%M"))
-
+    """
 
     # Les fonctions doivent être déclarées avant ce bloc #
     db.init_app(app)

@@ -91,7 +91,6 @@ db.ClinicalTrials.aggregate([
 ]);
 
 
-
 // Recherche d'Ivermectin dans les essais
 db.ClinicalTrials.find({ "interventions.name": { $regex: /ivermectin/i } })
 

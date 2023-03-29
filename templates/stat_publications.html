@@ -63,8 +63,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{ url_for('stats_pub') }}">Essais cliniques</a>
-                                    <a class="nav-link" href="{{ url_for('stats_clt') }}">Publications</a>
+                                    <a class="nav-link" href="{{ url_for('stats_clt') }}">Essais cliniques</a>
+                                    <a class="nav-link" href="{{ url_for('stats_pub') }}">Publications</a>
                                 </nav>
                             </div>
                             <a class="nav-link" href="{{ url_for('doi_search') }}">
@@ -97,23 +97,11 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Tableau de bord</h1>
+                        <h1 class="mt-4">Statistiques des Publications</h1>
                         <!--Séparateur-->
                         <div class="separator-breadcrumb border-top"></div>
                         <br>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar me-1"></i>
-                                        Nombre d'essais en différents phases
-                                    </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="50"></canvas></div>
-                                    <div class="card-footer small text-muted">Mise à jour à {% block content %} {{ tnow }} {% endblock %}</div>
-                                </div>
-                            </div>
-                            <!--Possibilité de rajouter un graphique-->
-                        </div>
+                        <!--AFFICHAGES DES DONNEES ICI-->
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">

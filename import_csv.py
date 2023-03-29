@@ -12,31 +12,35 @@ db = client['trial_visualizer']
 ClinicalTrials = db['ClinicalTrials']
 Publications = db['Publications']
 
+
 ## EXTRACTION DES DONNEES DES FICHIERS CSV ET TRANSFORMATION
 # ESSAIS CLINIQUE
-def traitement_CSV_IMPORT(csv_type: str,csv_file):
+def traitement_CSV_IMPORT(csv_type: str, csv_file):
     lecteur_csv = csv.DictReader(csv_file)
-    c_trial_obstudies = [dict(ligne) for ligne in lecteur_csv]
-    for i in range(len(c_trial_obstudies)):
-        # Conversion de la chaine de caractère sur [interventions] en liste de dictionnaires
-        interventions_string = c_trial_obstudies[i]['interventions']
-        if len(interventions_string) > 0:
-            interventions = ast.literal_eval(interventions_string)
-            c_trial_obstudies[i]['interventions'] = interventions
+    dataPython = [dict(ligne) for ligne in lecteur_csv]
+    if csv_type == "Clinical trial obstudies":
+        for i in range(len(dataPython)):
+            # Conversion de la chaine de caractère sur [interventions] en liste de dictionnaires
+            interventions_string = dataPython[i]['interventions']
+            if len(interventions_string) > 0:
+                interventions = ast.literal_eval(interventions_string)
+                dataPython[i]['interventions'] = interventions
 
-        # Conversion de la chaine de caractère sur [conditions] en liste de string
-        data_conditions = c_trial_obstudies[i]['conditions']
-        if len(data_conditions) > 0:
-            data_list = [data.strip() for data in data_conditions.split('•')]
-            c_trial_obstudies[i]['conditions'] = data_list
+            # Conversion de la chaine de caractère sur [conditions] en liste de string
+            data_conditions = dataPython[i]['conditions']
+            if len(data_conditions) > 0:
+                data_list = [data.strip() for data in data_conditions.split('•')]
+                dataPython[i]['conditions'] = data_list
 
-        # Autres modifications
-        c_trial_obstudies[i]['trial_type'] = "cl_obstudies"
-        dateP = datetime.strptime(c_trial_obstudies[i]['dateInserted'], '%m/%d/%Y').date()
-        c_trial_obstudies[i]['dateInserted'] = dateP.strftime('%Y-%m-%d')
-        if len(c_trial_obstudies[i]['date']) > 0:
-            dateF = datetime.strptime(c_trial_obstudies[i]['date'], '%m/%d/%Y').date()
-            c_trial_obstudies[i]['date'] = dateF.strftime('%Y-%m-%d')
+            # Autres modifications
+            dataPython[i]['trial_type'] = "cl_obstudies"
+            dateP = datetime.strptime(dataPython[i]['dateInserted'], '%m/%d/%Y').date()
+            dataPython[i]['dateInserted'] = dateP.strftime('%Y-%m-%d')
+            if len(dataPython[i]['date']) > 0:
+                dateF = datetime.strptime(dataPython[i]['date'], '%m/%d/%Y').date()
+                dataPython[i]['date'] = dateF.strftime('%Y-%m-%d')
+
+
 """
 with open('./data_extracted/C_obstudies.csv', 'r') as f:
     lecteur_csv = csv.DictReader(f)
