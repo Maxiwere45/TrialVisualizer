@@ -88,9 +88,9 @@ def get_total_pub():
 
 def get_total_pub_essais_rand():
     db = get_db()
-    return len(list(db['Publications'].count_documents({'p_type':'p_randtrials'})))
+    return db['Publications'].count_documents({'p_type': 'p_randtrials'})
 
 def get_total_pub_essais_obs():
     db = get_db()
-    return len(list(db['Publications'].count_documents({'p_type':'p_obstudies'})))
+    return db['Publications'].count_documents({'p_type': 'p_obstudies'})
 

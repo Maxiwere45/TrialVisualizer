@@ -67,8 +67,16 @@ def create_app(test_config=None):
 
     @app.route('/pub')
     def publications_page():
+        toto_obs = db.get_total_pub_essais_rand()
+        toto_rand = db.get_total_pub_essais_obs()
         publications = db.get_publication()
-        return render_template('publications.html', app=app, publications=publications)
+        return render_template(
+            'publications.html',
+            app=app,
+            publications=publications,
+            total_rand=toto_rand,
+            total_obs=toto_obs
+        )
 
     # Request GET
     @app.route('/chart-nb-phase')
@@ -90,3 +98,5 @@ def create_app(test_config=None):
     db.init_app(app)
     app.register_blueprint(auth.bp)
     return app
+
+

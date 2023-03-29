@@ -127,6 +127,9 @@
                         <h1 class="mt-4">Publications</h1>
                         <!--Séparateur-->
                         <div class="separator-breadcrumb border-top"></div>
+                     <!-- Entires data Card Example -->
+                    <br>
+                    <div class="row">
                     <br>
                     <div class="col-xl-3 col-md-6 mb-4">
                         <div class="card border-left-primary shadow h-100 py-2">
@@ -134,8 +137,8 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        Total publication de trial</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ allg }}</div>
+                                        Total publication des essais random</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_rand }}</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fi fi-br-list-check"></i>
@@ -145,14 +148,15 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-xl-3 col-md-6 mb-4">
                         <div class="card border-left-primary shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        Total de publication obs</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ allg }}</div>
+                                        Total de publication essais obs</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ total_obs }}</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fi fi-br-list-check"></i>
@@ -162,7 +166,7 @@
                             </div>
                         </div>
                     </div>
-                        <br>
+
                         <div class="card mb-4">
                             <div class="card-body">
                                 Toutes les <strong>publications</strong> sont affichées ci-dessous. Vous pouvez filtrer les résultats en utilisant les filtres du tableau et la recherche.
