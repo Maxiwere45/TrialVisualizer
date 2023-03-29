@@ -21,7 +21,6 @@ if (monBouton != null) {
                 .then(response => response.json())
                 .then(data => {
                     resultat.innerHTML = JSON.stringify(data, null, 2);
-                    // console.log(data);
         });
         }, 1500);
     };

@@ -81,10 +81,9 @@ def get_total_esais_male():
     db = get_db()
     return len(list(db['ClinicalTrials'].find({'gender': 'Male'})))
 
-
 def get_total_pub():
     db = get_db()
-    return db['ClinicalTrials'].count_documents({'$and': [{'p_type': 'p_obstudies'}, {'p_type': 'p_randtrials'}]})
+    return len(list(db['Publications'].find({})))
 
 def get_total_pub_essais_rand():
     db = get_db()
@@ -95,13 +94,22 @@ def get_total_pub_essais_obs():
     return db['Publications'].count_documents({'p_type': 'p_obstudies'})
 
 def get_top_concepts_by_publication_count(year):
-  pipeline = [
-    { "$unwind": "$concepts" },
-    { "$group": {"_id": "$concepts", "count": {"$sum": 1}}},
-    { "$match": {"openAccess": {"$not": {"$regex": "green_sub"}}}},
-    { "$match": {"year" : year}},
-    { "$sort": {"count": -1}},
-    { "$limit": 20 }
-  ]
-  return list(db['Publications'].aggregate(pipeline))
+    db = get_db()
+    pipeline = [
+        { "$unwind": "$concepts" },
+        { "$group": {"_id": "$concepts", "count": {"$sum": 1}}},
+        { "$match": {"openAccess": {"$not": {"$regex": "green_sub"}}}},
+        { "$match": {"year" : year}},
+        { "$sort": {"count": -1}},
+        { "$limit": 20 }
+      ]
+    return list(db['Publications'].aggregate(pipeline))
 
+
+def get_total_articles()->int:
+    db = get_db()
+    return len(list(db['Publications'].find({'doctype': 'article'})))
+
+def get_total_preprints()->int:
+    db = get_db()
+    return len(list(db['Publications'].find({'doctype': 'preprint'})))
