@@ -61,6 +61,10 @@ def create_app(test_config=None):
             app=app
         )
 
+    @app.route('/import')
+    def import_page():
+        return 0  # render_template('import_data.html', app=app)
+
     @app.route('/pub')
     def publications_page():
         publications = db.get_publication()
@@ -86,18 +90,3 @@ def create_app(test_config=None):
     db.init_app(app)
     app.register_blueprint(auth.bp)
     return app
-
-
-"""
-    @app.route('/')
-    def nb_trials():
-        return request(db.get_total_essais)
-
-    @app.route('/')
-    def nb_trials_fem():
-        return request(db.get_total_esais_fem)
-
-    @app.route('/')
-    def nb_trials_male():
-        return request(db.get_total_esais_male)
-"""
