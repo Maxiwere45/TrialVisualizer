@@ -141,11 +141,10 @@
                                      <tbody>
                                         <!--CODE
                                         faire une fonction de la fonction get_top_concepts_by_publication_count -->
-                                        {% for concepts, count in get_top_concepts_by_publication_count.items()%}
+                                        {% for concepts, count in get_top_concept.items %}
                                             <tr>
                                                 <td>{{ concepts}}</td>
                                                 <td>{{ count}}</td>
-
                                             </tr>
                                         {% endfor %}
                                         {% block content %}{% endblock %}

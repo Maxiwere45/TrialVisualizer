@@ -93,8 +93,9 @@ def get_total_pub_essais_obs():
     db = get_db()
     return db['Publications'].count_documents({'p_type': 'p_obstudies'})
 
-def get_top_concepts_by_publication_count(year):
+def get_top_concepts_by_publication_count(year: str):
     db = get_db()
+    # Apparament ça ne renvoie aucun résultat, peu etre essayer 2020
     pipeline = [
         { "$unwind": "$concepts" },
         { "$group": {"_id": "$concepts", "count": {"$sum": 1}}},

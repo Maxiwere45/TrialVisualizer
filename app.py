@@ -114,7 +114,8 @@ def create_app(test_config=None):
             'stat_publications.html',
             app=app,
             toto_art=toto_art,
-            toto_preprint=toto_preprint
+            toto_preprint=toto_preprint,
+            get_top_concept=db.get_top_concepts_by_publication_count("2020//")
         )
 
     @app.route('/stats_clt')
