@@ -1,10 +1,9 @@
 import csv
 import ast
-import pymongo
 from datetime import datetime
 from pymongo import MongoClient
 
-## CONNEXION A LA BASE DE DONNEES
+# CONNEXION A LA BASE DE DONNEES
 client = MongoClient('mongodb+srv://nrm4206a:9dfe351b@dbsae.ohuhcxc.mongodb.net/?retryWrites=true&w=majority')
 
 # Connection à la base de données MongoDB
@@ -13,7 +12,7 @@ ClinicalTrials = db['ClinicalTrials']
 Publications = db['Publications']
 
 
-## EXTRACTION DES DONNEES DES FICHIERS CSV ET TRANSFORMATION
+# EXTRACTION DES DONNEES DES FICHIERS CSV ET TRANSFORMATION
 # ESSAIS CLINIQUE
 def traitement_CSV_IMPORT(csv_type: str, csv_file):
     lecteur_csv = csv.DictReader(csv_file)
@@ -39,6 +38,8 @@ def traitement_CSV_IMPORT(csv_type: str, csv_file):
             if len(dataPython[i]['date']) > 0:
                 dateF = datetime.strptime(dataPython[i]['date'], '%m/%d/%Y').date()
                 dataPython[i]['date'] = dateF.strftime('%Y-%m-%d')
+            return "Les données ont été importées avec succès"
+            client.close()
         elif csv_type == 'Clinical trial randtrial':
             interventions_string = dataPython[i]['interventions']
             if len(interventions_string) > 0:
@@ -61,6 +62,8 @@ def traitement_CSV_IMPORT(csv_type: str, csv_file):
                     dataPython[i]['date'] = dateF.strftime('%Y-%m-%d')
             except ValueError:
                 continue
+            return "Les données ont été importées avec succès"
+            client.close()
         elif csv_type == 'Publications randtrial':
             openAccess = dataPython[i]['openAccess']
             if len(openAccess) > 0:
@@ -92,6 +95,8 @@ def traitement_CSV_IMPORT(csv_type: str, csv_file):
                     dataPython[i]['datePublished'] = dateF.strftime('%Y-%m-%d')
             except ValueError:
                 continue
+            return "Les données ont été importées avec succès"
+            client.close()
         elif csv_type == 'Publications obstudies':
             openAccess = dataPython[i]['openAccess']
             if len(openAccess) > 0:
@@ -122,21 +127,10 @@ def traitement_CSV_IMPORT(csv_type: str, csv_file):
                     dataPython[i]['datePublished'] = dateF.strftime('%Y-%m-%d')
             except ValueError:
                 continue
-
-# Insérer les données dans la base de données
-print("Insertion des données dans la base de données...")
-
-# NE PAS DE-COMMENTER, LES DONNES SONT DEJA INSERE
-"""
-ClinicalTrials.insert_many(c_trial_obstudies) # SUCCESS
-ClinicalTrials.insert_many(c_trial_randtrials) # SUCCESS
-"""
-Publications.insert_many(pub_obstudies)  # SUCCESS
-Publications.insert_many(pub_randtrials)  # SUCCESS
-
-print("Insertion des données terminée !")
-print("\t> Nombre de ClinicalTrials : ", ClinicalTrials.count_documents({}))
-print("\t> Nombre de publications : ", Publications.count_documents({}))
+            client.close()
+            return "Les données ont été importées avec succès"
+        else:
+            return "Le type de fichier n'est pas reconnu"
 
 # Fermeture de la connexion à la base de données
-connect.client.close()
+
