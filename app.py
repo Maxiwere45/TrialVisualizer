@@ -1,4 +1,5 @@
 import datetime
+import import_csv as impcsv
 import os
 import auth
 import db
@@ -79,12 +80,8 @@ def create_app(test_config=None):
         if not file_csv.filename.endswith('.csv'):
             return 'Le fichier n\'est pas un CSV !'
 
-        # Lire le contenu du fichier avec pandas
-        df = pd.read_csv(file_csv.stream)
-        # Faire quelque chose avec le dataframe (par exemple, afficher les 10 premières lignes)
-        print(df.head(10))
-        # Retourner une réponse (par exemple, une page HTML qui confirme l'importation)
-        return '<h1>Fichier importé avec succès !</h1>'
+        res = impcsv.traitement_CSV_IMPORT(type_data, file_csv.stream)
+        return res
 
     @app.route('/pub')
     def publications_page():
