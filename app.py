@@ -85,15 +85,14 @@ def create_app(test_config=None):
 
     @app.route('/pub')
     def publications_page():
-        toto_obs = db.get_total_pub_essais_rand()
-        toto_rand = db.get_total_pub_essais_obs()
-        publications = db.get_publication()
         return render_template(
             'publications.html',
             app=app,
-            publications=publications,
-            total_rand=toto_rand,
-            total_obs=toto_obs
+            publications=db.get_publication(),
+            total_rand=db.get_total_pub_essais_obs(),
+            total_obs=db.get_total_pub_essais_rand(),
+            nb_articles=db.get_total_articles(),
+            total_pub=db.get_total_pub()
         )
 
     # Request GET
