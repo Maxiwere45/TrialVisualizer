@@ -138,6 +138,12 @@
                                             <th>Nb</th>
                                         </tr>
                                     </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Concept</th>
+                                            <th>Nb</th>
+                                        </tr>
+                                    </tfoot>
                                      <tbody>
                                         <!--CODE
                                         faire une fonction de la fonction get_top_concepts_by_publication_count -->
@@ -147,12 +153,7 @@
                                                 <td>{{ count}}</td>
                                             </tr>
                                         {% endfor %}
-                                        {% block content %}{% endblock %}
-                                        <!--CODE-->
-                                        <tr>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
+
                                     </tbody>
                                 </table>
                         <!--Afficher un graphe pie chart-->
