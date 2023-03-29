@@ -18,8 +18,8 @@ Publications = db['Publications']
 def traitement_CSV_IMPORT(csv_type: str, csv_file):
     lecteur_csv = csv.DictReader(csv_file)
     dataPython = [dict(ligne) for ligne in lecteur_csv]
-    if csv_type == "Clinical trial obstudies":
-        for i in range(len(dataPython)):
+    for i in range(len(dataPython)):
+        if csv_type == 'Clinical trial obstudies':
             # Conversion de la chaine de caractère sur [interventions] en liste de dictionnaires
             interventions_string = dataPython[i]['interventions']
             if len(interventions_string) > 0:
@@ -39,129 +39,90 @@ def traitement_CSV_IMPORT(csv_type: str, csv_file):
             if len(dataPython[i]['date']) > 0:
                 dateF = datetime.strptime(dataPython[i]['date'], '%m/%d/%Y').date()
                 dataPython[i]['date'] = dateF.strftime('%Y-%m-%d')
+        elif csv_type == 'Clinical trial randtrial':
+            interventions_string = dataPython[i]['interventions']
+            if len(interventions_string) > 0:
+                interventions = ast.literal_eval(interventions_string)
+                dataPython[i]['interventions'] = interventions
 
+            data_conditions = dataPython[i]['conditions']
+            if len(data_conditions) > 0:
+                data_list = [data.strip() for data in data_conditions.split('•')]
+                dataPython[i]['conditions'] = data_list
 
-"""
-with open('./data_extracted/C_obstudies.csv', 'r') as f:
-    lecteur_csv = csv.DictReader(f)
-    c_trial_obstudies = [dict(ligne) for ligne in lecteur_csv]
-    for i in range(len(c_trial_obstudies)):
-        # Conversion de la chaine de caractère sur [interventions] en liste de dictionnaires
-        interventions_string = c_trial_obstudies[i]['interventions']
-        if len(interventions_string) > 0:
-            interventions = ast.literal_eval(interventions_string)
-            c_trial_obstudies[i]['interventions'] = interventions
+            # Autres modifications
+            dataPython[i]['trial_type'] = "cl_randtrials"
+            try:
+                if len(dataPython[i]['dateInserted']) > 0:
+                    dateP = datetime.strptime(dataPython[i]['dateInserted'], '%m/%d/%Y').date()
+                    dataPython[i]['dateInserted'] = dateP.strftime('%Y-%m-%d')
+                if len(dataPython[i]['date']) > 0:
+                    dateF = datetime.strptime(dataPython[i]['date'], '%m/%d/%Y').date()
+                    dataPython[i]['date'] = dateF.strftime('%Y-%m-%d')
+            except ValueError:
+                continue
+        elif csv_type == 'Publications randtrial':
+            openAccess = dataPython[i]['openAccess']
+            if len(openAccess) > 0:
+                data_list = [data.strip() for data in openAccess.split('•')]
+                dataPython[i]['openAccess'] = data_list
 
-        # Conversion de la chaine de caractère sur [conditions] en liste de string
-        data_conditions = c_trial_obstudies[i]['conditions']
-        if len(data_conditions) > 0:
-            data_list = [data.strip() for data in data_conditions.split('•')]
-            c_trial_obstudies[i]['conditions'] = data_list
+            concepts = dataPython[i]['concepts']
+            if len(concepts) > 0:
+                data_list = [data.strip() for data in concepts.split('•')]
+                dataPython[i]['concepts'] = data_list
 
-        # Autres modifications
-        c_trial_obstudies[i]['trial_type'] = "cl_obstudies"
-        dateP = datetime.strptime(c_trial_obstudies[i]['dateInserted'], '%m/%d/%Y').date()
-        c_trial_obstudies[i]['dateInserted'] = dateP.strftime('%Y-%m-%d')
-        if len(c_trial_obstudies[i]['date']) > 0:
-            dateF = datetime.strptime(c_trial_obstudies[i]['date'], '%m/%d/%Y').date()
-            c_trial_obstudies[i]['date'] = dateF.strftime('%Y-%m-%d')
+            meshTerms = dataPython[i]['meshTerms']
+            if len(meshTerms) > 0:
+                data_list = [data.strip() for data in meshTerms.split('•')]
+                dataPython[i]['meshTerms'] = data_list
 
-with open('./data_extracted/C_randTrials.csv', 'r') as f:
-    lecteur_csv = csv.DictReader(f)
-    c_trial_randtrials = [dict(ligne) for ligne in lecteur_csv]
-    for i in range(len(c_trial_randtrials)):
-        interventions_string = c_trial_randtrials[i]['interventions']
-        if len(interventions_string) > 0:
-            interventions = ast.literal_eval(interventions_string)
-            c_trial_randtrials[i]['interventions'] = interventions
+            # Autres modifications
+            dataPython[i]['authors'] = "N/A"
+            dataPython[i]['p_type'] = "p_randtrials"
 
-        data_conditions = c_trial_randtrials[i]['conditions']
-        if len(data_conditions) > 0:
-            data_list = [data.strip() for data in data_conditions.split('•')]
-            c_trial_randtrials[i]['conditions'] = data_list
+            try:
+                dataPython[i]['year'] = int(dataPython[i]['year'])
+                if len(dataPython[i]['dateInserted']) > 0:
+                    dateP = datetime.strptime(dataPython[i]['dateInserted'], '%m/%d/%Y').date()
+                    dataPython[i]['dateInserted'] = dateP.strftime('%Y-%m-%d')
 
-        # Autres modifications
-        c_trial_randtrials[i]['trial_type'] = "cl_randtrials"
-        try:
-            if len(c_trial_randtrials[i]['dateInserted']) > 0:
-                dateP = datetime.strptime(c_trial_randtrials[i]['dateInserted'], '%m/%d/%Y').date()
-                c_trial_randtrials[i]['dateInserted'] = dateP.strftime('%Y-%m-%d')
-            if len(c_trial_randtrials[i]['date']) > 0:
-                dateF = datetime.strptime(c_trial_randtrials[i]['date'], '%m/%d/%Y').date()
-                c_trial_randtrials[i]['date'] = dateF.strftime('%Y-%m-%d')
-        except ValueError:
-            continue
+                if len(dataPython[i]['datePublished']) > 0:
+                    dateF = datetime.strptime(dataPython[i]['datePublished'], '%m/%d/%Y').date()
+                    dataPython[i]['datePublished'] = dateF.strftime('%Y-%m-%d')
+            except ValueError:
+                continue
+        elif csv_type == 'Publications obstudies':
+            openAccess = dataPython[i]['openAccess']
+            if len(openAccess) > 0:
+                data_list = [data.strip() for data in openAccess.split('•')]
+                dataPython[i]['openAccess'] = data_list
 
-# PUBBLICATIONS
-with open('./data_extracted/P_obstudies.csv', 'r') as f:
-    lecteur_csv = csv.DictReader(f)
-    pub_obstudies = [dict(ligne) for ligne in lecteur_csv]
-    for i in range(len(pub_obstudies)):
-        openAccess = pub_obstudies[i]['openAccess']
-        if len(openAccess) > 0:
-            data_list = [data.strip() for data in openAccess.split('•')]
-            pub_obstudies[i]['openAccess'] = data_list
+            concepts = dataPython[i]['concepts']
+            if len(concepts) > 0:
+                data_list = [data.strip() for data in concepts.split('•')]
+                dataPython[i]['concepts'] = data_list
 
-        concepts = pub_obstudies[i]['concepts']
-        if len(concepts) > 0:
-            data_list = [data.strip() for data in concepts.split('•')]
-            pub_obstudies[i]['concepts'] = data_list
+            meshTerms = dataPython[i]['meshTerms']
+            if len(meshTerms) > 0:
+                data_list = [data.strip() for data in meshTerms.split('•')]
+                dataPython[i]['meshTerms'] = data_list
 
-        meshTerms = pub_obstudies[i]['meshTerms']
-        if len(meshTerms) > 0:
-            data_list = [data.strip() for data in meshTerms.split('•')]
-            pub_obstudies[i]['meshTerms'] = data_list
+            # Autres modifications
+            dataPython[i]['authors'] = "N/A"
+            dataPython[i]['p_type'] = "p_obstudies"
+            dataPython[i]['year'] = int(dataPython[i]['year'])
+            try:
+                if len(dataPython[i]['dateInserted']) > 0:
+                    dateP = datetime.strptime(dataPython[i]['dateInserted'], '%m/%d/%Y').date()
+                    dataPython[i]['dateInserted'] = dateP.strftime('%Y-%m-%d')
 
-        # Autres modifications
-        pub_obstudies[i]['authors'] = "N/A"
-        pub_obstudies[i]['p_type'] = "p_obstudies"
-        pub_obstudies[i]['year'] = int(pub_obstudies[i]['year'])
-        try:
-            if len(pub_obstudies[i]['dateInserted']) > 0:
-                dateP = datetime.strptime(pub_obstudies[i]['dateInserted'], '%m/%d/%Y').date()
-                pub_obstudies[i]['dateInserted'] = dateP.strftime('%Y-%m-%d')
+                if len(dataPython[i]['datePublished']) > 0:
+                    dateF = datetime.strptime(dataPython[i]['datePublished'], '%m/%d/%Y').date()
+                    dataPython[i]['datePublished'] = dateF.strftime('%Y-%m-%d')
+            except ValueError:
+                continue
 
-            if len(pub_obstudies[i]['datePublished']) > 0:
-                dateF = datetime.strptime(pub_obstudies[i]['datePublished'], '%m/%d/%Y').date()
-                pub_obstudies[i]['datePublished'] = dateF.strftime('%Y-%m-%d')
-        except ValueError:
-            continue
-
-with open('./data_extracted/P_randTrials.csv', 'r') as f:
-    lecteur_csv = csv.DictReader(f)
-    pub_randtrials = [dict(ligne) for ligne in lecteur_csv]
-    for i in range(len(pub_randtrials)):
-        openAccess = pub_randtrials[i]['openAccess']
-        if len(openAccess) > 0:
-            data_list = [data.strip() for data in openAccess.split('•')]
-            pub_randtrials[i]['openAccess'] = data_list
-
-        concepts = pub_randtrials[i]['concepts']
-        if len(concepts) > 0:
-            data_list = [data.strip() for data in concepts.split('•')]
-            pub_randtrials[i]['concepts'] = data_list
-
-        meshTerms = pub_randtrials[i]['meshTerms']
-        if len(meshTerms) > 0:
-            data_list = [data.strip() for data in meshTerms.split('•')]
-            pub_randtrials[i]['meshTerms'] = data_list
-
-        # Autres modifications
-        pub_randtrials[i]['authors'] = "N/A"
-        pub_randtrials[i]['p_type'] = "p_randtrials"
-
-        try:
-            pub_randtrials[i]['year'] = int(pub_randtrials[i]['year'])
-            if len(pub_randtrials[i]['dateInserted']) > 0:
-                dateP = datetime.strptime(pub_randtrials[i]['dateInserted'], '%m/%d/%Y').date()
-                pub_randtrials[i]['dateInserted'] = dateP.strftime('%Y-%m-%d')
-
-            if len(pub_randtrials[i]['datePublished']) > 0:
-                dateF = datetime.strptime(pub_randtrials[i]['datePublished'], '%m/%d/%Y').date()
-                pub_randtrials[i]['datePublished'] = dateF.strftime('%Y-%m-%d')
-        except ValueError:
-            continue
-"""
 # Insérer les données dans la base de données
 print("Insertion des données dans la base de données...")
 
