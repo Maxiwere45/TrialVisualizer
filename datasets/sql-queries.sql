@@ -68,6 +68,7 @@ db.ClinicalTrials.find({
 
 // Groupement des essais selon les interventions (colonne intervention),
     -- en particulier ceux avec un arm_group_label = Drug
+
 db.ClinicalTrials.aggregate([
   {
     $unwind: "$interventions"
@@ -122,3 +123,12 @@ db.Publications.aggregate([{
         }
     }]);
 
+// Détermination des concepts les plus fréquents dans les publications (hors preprints pour une période donnée) :
+db.Publications.aggregate([
+    { $unwind: "$concepts" },
+    { $group: { _id: "$concepts", count: { $sum: 1 } } },
+    { $match: { "openAccess": { $not: /green_sub/ } } },
+    //{ $match: { "year" : 2020}},
+    { $sort: { count: -1 } },
+    //{ $limit: 20 }
+]);
