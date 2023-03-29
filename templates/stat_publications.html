@@ -101,6 +101,28 @@
                         <!--Séparateur-->
                         <div class="separator-breadcrumb border-top"></div>
                         <br>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <div class="card-header">Total des articles</div>
+                                             <div class="card-body">
+                                                <h5 class="card-title">{{toto_art }}</h5>
+                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <div class="card-header">Total des preprints</div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{ toto_preprint}}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <br>
                         <!--AFFICHAGES DES DONNEES ICI-->
                         <!--Affichage du tableau-->
                         <div class="card mb-4">
@@ -117,12 +139,12 @@
                                         </tr>
                                     </thead>
                                      <tbody>
-                                        <!--CODE-->
-                                        //faire une fonction de la fonction get_top_concepts_by_publication_count
-                                        {% for document in publications %}
+                                        <!--CODE
+                                        faire une fonction de la fonction get_top_concepts_by_publication_count -->
+                                        {% for concepts, count in get_top_concepts_by_publication_count.items()%}
                                             <tr>
-                                                <td>{{ document[''] }}</td>
-                                                <td>{{ document[''] }}</td>
+                                                <td>{{ concepts}}</td>
+                                                <td>{{ count}}</td>
 
                                             </tr>
                                         {% endfor %}

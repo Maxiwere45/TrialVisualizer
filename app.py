@@ -108,7 +108,14 @@ def create_app(test_config=None):
 
     @app.route('/stats_pub')
     def stats_pub():
-        return render_template('stat_publications.html', app=app)
+        toto_art = db.get_total_articles()
+        toto_preprint = db.get_total_preprints()
+        return render_template(
+            'stat_publications.html',
+            app=app,
+            toto_art=toto_art,
+            toto_preprint=toto_preprint
+        )
 
     @app.route('/stats_clt')
     def stats_clt():

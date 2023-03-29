@@ -1,0 +1,24 @@
+Index: datasets/sql-queries.sql
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>use trial_visualizer\r\n\r\n// Publications du mois courant (ex mai 2020) triées par score altmetric décroissant et départagées par citations décroissantes\r\n// FONCTIONNEL\r\ndb.Publications.aggregate([\r\n  {\r\n    $match: {\r\n      datePublished: {\r\n        $gte: \"2020-05-01\",\r\n        $lt: \"2020-06-01\"\r\n      }\r\n    }\r\n  },\r\n  {\r\n    $sort: {\r\n      altmetric: -1,\r\n      timesCited: -1\r\n    }\r\n  }\r\n])\r\n\r\n// Nombre d'essais en phase 1 / 2 / 3 / 4 [\"CHICTR2000032400\" a retirer]\r\n// FONCTIONNEL\r\ndb.ClinicalTrials.aggregate([\r\n  {\r\n    $group: {\r\n      _id: \"$phase\",\r\n      count: { $sum: 1 }\r\n    }\r\n  }\r\n])\r\n\r\n// Nombre d'essais par genre [ Attention, il y a des valeurs null ]\r\n// FONCTIONNEL\r\ndb.ClinicalTrials.aggregate([\r\n  {\r\n    $group: {\r\n      _id: \"$gender\",\r\n      count: { $sum: 1 }\r\n    }\r\n  }\r\n])\r\n\r\ndb.ClinicalTrials.findOne(\r\n  { id: \"ISRCTN10077335\" },\r\n  { interventions: 1, _id: 0 }\r\n)\r\n\r\n// Nombre d'essais par type d'intervention\r\n// FONCTIONNEL\r\ndb.ClinicalTrials.aggregate([\r\n  {\r\n    $unwind: \"$interventions\"\r\n  },\r\n  {\r\n    $group: {\r\n      _id: \"$interventions.arm_group_labels\",\r\n      count: { $sum: 1 }\r\n    }\r\n  }\r\n])\r\n\r\n// arm_group_labels: [ 'Drug' ]\r\n// FONCTIONNEL\r\ndb.ClinicalTrials.find({\r\n   \"interventions.arm_group_labels\": /Drug/i\r\n});\r\n\r\n// Groupement des essais selon les interventions (colonne intervention), en particulier ceux avec un arm_group_label = Drug\r\ndb.ClinicalTrials.aggregate([\r\n  {\r\n    $unwind: \"$interventions\"\r\n  },\r\n  {\r\n    $match: {\r\n      \"interventions.type\": \"Drug\"\r\n    }\r\n  },\r\n  {\r\n    $group: {\r\n      _id: \"$interventions.name\",\r\n      count: { $sum: 1 }\r\n    }\r\n  },\r\n  {\r\n    $sort: {\r\n      count: -1\r\n    }\r\n  }\r\n]);\r\n\r\n\r\n\r\n// Recherche d'Ivermectin dans les essais\r\ndb.ClinicalTrials.find({ \"interventions.name\": { $regex: /ivermectin/i } })\r\n\r\n// Recherche d'Ivermectin dans les publications\r\ndb.Publications.find({ $or: [\r\n  { \"title\": { $regex: /ivermectin/i } },\r\n  { \"abstract\": { $regex: /ivermectin/i } },\r\n  { \"concepts\": { $regex: /ivermectin/i } },\r\n  { \"meshTerms\": { $regex: /ivermectin/i } }\r\n] })\r\n\r\n// Publications du mois courant (ex mai 2020)\r\n// triées par score altmetric décroissant et\r\n// départagées par citations décroissantes\r\ndb.Publications.aggregate([{\r\n    $match: {\r\n        datePublished: {\r\n        $gte: '2020-05-01',\r\n        $lt: '2020-06-01'\r\n        },\r\n        doctype: {\r\n            $ne: 'preprint'\r\n        }\r\n    }},\r\n    {\r\n        $sort: {\r\n            altmetric: -1,\r\n            timesCited: -1\r\n        }\r\n    }]);\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/datasets/sql-queries.sql b/datasets/sql-queries.sql
+--- a/datasets/sql-queries.sql	(revision 0eaae8581588a913d2ee2e85cacd2f45c7c72a06)
++++ b/datasets/sql-queries.sql	(date 1679669964198)
+@@ -122,3 +122,12 @@
+         }
+     }]);
+ 
++// Détermination des concepts les plus fréquents dans les publications (hors preprints pour une période donnée) :
++db.Publications.aggregate([
++    { $unwind: "$concepts" },
++    { $group: { _id: "$concepts", count: { $sum: 1 } } },
++    { $match: { "openAccess": { $not: /green_sub/ } } },
++    //{ $match: { "year" : 2020}},
++    { $sort: { count: -1 } },
++    //{ $limit: 20 }
++]);
+\ No newline at end of file
