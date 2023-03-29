@@ -1,8 +1,8 @@
 import datetime
 import os
 import auth
+import db
 import script_doi_extract as DOI_SEARCH
-import Database
 from flask import Flask, render_template, jsonify, request
 
 
@@ -15,7 +15,6 @@ def create_app(test_config=None):
     )
     app.config['MONGO_URI'] = 'mongodb+srv://nrm4206a:9dfe351b@dbsae.ohuhcxc.mongodb.net/?retryWrites=true&w=majority'
     app.config['MONGO_DBNAME'] = 'infos'
-    db = Database.Database()
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -50,9 +49,9 @@ def create_app(test_config=None):
             'clinicaltrials.html',
             app=app,
             trials=trials,
-            women = women,
-            men = men,
-            allg = allg
+            women=women,
+            men=men,
+            allg=allg
         )
 
     @app.route('/doi-search')
@@ -65,7 +64,7 @@ def create_app(test_config=None):
     @app.route('/pub')
     def publications_page():
         publications = db.get_publication()
-        return render_template('publications.html',app=app,publications=publications)
+        return render_template('publications.html', app=app, publications=publications)
 
     # Request GET
     @app.route('/chart-nb-phase')
@@ -87,6 +86,8 @@ def create_app(test_config=None):
     db.init_app(app)
     app.register_blueprint(auth.bp)
     return app
+
+
 """
     @app.route('/')
     def nb_trials():

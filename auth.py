@@ -1,14 +1,12 @@
 import functools
 import hashlib
-from Database import Database
+import db
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
-dataBase = Database()
-db = dataBase.get_db()
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
