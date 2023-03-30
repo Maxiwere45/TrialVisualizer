@@ -155,16 +155,36 @@
                             <!--CODE JINJA2-->
                             </tbody>
                         </table>
-                        <!--Afficher un graphe pie chart-->
-                        <div class="w-100"></div>
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-chart-area me-1"></i>
-                                Graphique
-                            </div>
-                            <div class="card-body">
-                                <canvas id="myChart" width="100%" height="40"></canvas>
-                            </div>
+
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            Revues publiant le plus d'abstracts
+                        </div>
+                        <div class="card-body">
+                            <table id="datatablesSimple">
+                                <thead>
+                                <tr>
+                                    <th>Revue</th>
+                                    <th>Nombre d'abstract</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Revue</th>
+                                    <th>Nombre d'abstract</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <!--CODE JINJA2-->
+                                {% for element in get_top_concept %}
+                                    <tr>
+                                        <td>{{ element["_id"] }}</td>
+                                        <td>{{ element["count"] }}</td>
+                                    </tr>
+                                {% endfor %}
+                                <!--CODE JINJA2-->
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

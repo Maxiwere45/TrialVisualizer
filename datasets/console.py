@@ -1,4 +1,5 @@
 import pymongo
+from bson import SON
 
 MONGO_URI = 'mongodb+srv://nrm4206a:9dfe351b@dbsae.ohuhcxc.mongodb.net/?retryWrites=true&w=majority'
 client = pymongo.MongoClient(MONGO_URI)
@@ -31,12 +32,28 @@ for i in val1:
         print("Il reste " + str(x) + " publications à traiter...")
 print("Traitement terminé !")
 """
-pipeline = [
-        {"$match": {"doctype": "article"}},
-        {"$unwind": "$concepts"},
-        {"$group": {"_id": "$concepts", "count": {"$sum": 1}}},
-        {"$sort": {"count": -1}}
-    ]
+cursor = publications.find({"published_date": {"$type": "date", "$exists": True}})
 
-res = list(db['Publications'].find({'id': "pub.1127884062"}))
-print(res[0])
+# Agrégation des données
+pipeline = [
+    {
+        "$group": {
+            "_id": {
+                "venue": "$venue",
+                "year": {"$year": "$published_date"}
+            },
+            "count": {"$sum": 1}
+        }
+    },
+    {
+        "$sort": {
+            "_id.year": 1,
+            "count": -1
+        }
+    }
+]
+
+result = db.Publications.aggregate(pipeline)
+
+for doc in result:
+    print(doc)
