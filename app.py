@@ -120,7 +120,7 @@ def create_app(test_config=None):
             app=app,
             toto_art=toto_art,
             toto_preprint=toto_preprint,
-            get_top_concept=db.get_top_concepts_by_publication_count("2020//")
+            get_top_concept=db.get_top_concepts_by_publication_count()
         )
 
     @app.route('/stats_clt')
