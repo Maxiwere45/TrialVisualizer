@@ -103,16 +103,21 @@ def get_total_pub_essais_obs():
     return db['Publications'].count_documents({'p_type': 'p_obstudies'})
 
 
+def get_pub_id(id_pub: str):
+    db = get_db()
+    result = list(db['Publications'].find({'id': id_pub}))
+    return dict(result[0])
+
+
 def get_top_concepts_by_publication_count():
     db = get_db()
-    # Apparament ça ne renvoie aucun résultat, peu etre essayer 2020
     pipeline = [
         {"$match": {"doctype": "article"}},
         {"$unwind": "$concepts"},
         {"$group": {"_id": "$concepts", "count": {"$sum": 1}}},
         {"$sort": {"count": -1}}
     ]
-    return list(db['Publications'].aggregate(pipeline))
+    return list(db['Publications'].aggregate(pipeline))[0:20]
 
 
 def get_total_articles() -> int:

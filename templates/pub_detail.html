@@ -97,77 +97,68 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Statistiques des Publications</h1>
+                <h1 class="mt-4">Detail de la publication {{ trial['id'] }}</h1>
                 <!--Séparateur-->
                 <div class="separator-breadcrumb border-top"></div>
                 <br>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header">Total des articles</div>
-                                <div class="card-body">
-                                    <h5 class="card-title">{{toto_art }}</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header">Total des preprints</div>
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ toto_preprint}}</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <br>
-                <!--AFFICHAGES DES DONNEES ICI-->
-                <!--Affichage du tableau-->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-table me-1"></i>
-                        Concept les plus fréquents hors période preprint
-                    </div>
+                <div class="card">
+                    <div class="card-header">TITRE</div>
                     <div class="card-body">
-                        <table id="datatablesSimple">
-                            <thead>
-                            <tr>
-                                <th>Concept</th>
-                                <th>Nb</th>
-                            </tr>
-                            </thead>
-                            <tfoot>
-                            <tr>
-                                <th>Concept</th>
-                                <th>Nb</th>
-                            </tr>
-                            </tfoot>
-                            <tbody>
-                            <!--CODE JINJA2-->
-                            {% for element in get_top_concept %}
-                                <tr>
-                                    <td>{{ element["_id"] }}</td>
-                                    <td>{{ element["count"] }}</td>
-                                </tr>
-                            {% endfor %}
-                            <!--CODE JINJA2-->
-                            </tbody>
-                        </table>
-                        <!--Afficher un graphe pie chart-->
-                        <div class="w-100"></div>
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-chart-area me-1"></i>
-                                Graphique
-                            </div>
+                        <h5 class="card-title">{{ trial['title'] }}</h5>
+                    </div>
+                </div>
+                <div class="w-100"><p></p></div>
+                <div class="row">
+                    <!-- 1st card -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card">
+                            <div class="card-header">DETAILS</div>
                             <div class="card-body">
-                                <canvas id="myChart" width="100%" height="40"></canvas>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">ID : {{ trial['id'] }}</li>
+                                    <li class="list-group-item">Registry : {{ trial['registry'] }}</li>
+                                    <li class="list-group-item">Date inserted : {{ trial['dateInserted'] }}</li>
+                                    <li class="list-group-item">Date published : {{ trial['date'] }}</li>
+                                    <li class="list-group-item">Linkout : {{ trial['linkout'] }}</li>
+                                    <li class="list-group-item">Gender : {{ trial['gender'] }}</li>
+                                    <li class="list-group-item">Phase : {{ trial['phase'] }}</li>
+                                    <li class="list-group-item">Acronym : {{ trial['acronym'] }}</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <!-- 3rd card -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card">
+                            <div class="card-header">INTERVENTIONS</div>
+                            <div class="card-body">
+                                {% for i in trial['interventions'][0] %}
+                                    <code>{{ i }}</code> : <i>{{ trial['interventions'][0][i] }}</i>
+                                    <br>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                            <div class="card">
+                                <div class="card-header">CONDITIONS</div>
+                                <div class="card-body">
+                                    {% for element in trial['conditions'] %}
+                                        <code>{{ element }}</code>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-100"><p></p></div>
+                    <!-- 4th card -->
+                    <div class="card">
+                        <div class="card-header">ABSTRACT</div>
+                        <div class="card-body">
+                            <p class="card-text">{{ trial['abstract'] }}</p>
+                        </div>
+                    </div>
+                    <div class="w-100"><p></p></div>
             </div>
         </main>
         <footer class="py-4 bg-light mt-auto">

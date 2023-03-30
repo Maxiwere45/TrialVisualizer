@@ -60,8 +60,13 @@ def create_app(test_config=None):
     @app.route('/details/<string:id>', methods=['GET'])
     def clinical_trial_page_detail(id):
         trial = db.get_trial_id(id)
-        # votre code pour afficher les détails de l'essai clinique avec cet ID
         return render_template('clt_details.html', app=app, trial=trial)
+
+    @app.route('/detailspub/<string:id>', methods=['GET'])
+    def publication_page_detail(id):
+        pub = db.get_pub_id(id)
+        return render_template('pub_details.html', app=app, pub=pub)
+
 
     @app.route('/doi-search')
     def doi_search():
