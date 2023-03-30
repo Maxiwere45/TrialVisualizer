@@ -109,13 +109,14 @@ def get_pub_id(id_pub: str):
     return dict(result[0])
 
 
-def get_top_concepts_by_publication_count():
+def get_top_concepts_by_publication_count(year:str):
     db = get_db()
     pipeline = [
         {"$match": {"doctype": "article"}},
         {"$unwind": "$concepts"},
         {"$group": {"_id": "$concepts", "count": {"$sum": 1}}},
-        {"$sort": {"count": -1}}
+        {"$sort": {"count": -1}},
+        {"$match": {"year": year}}
     ]
     return list(db['Publications'].aggregate(pipeline))[0:20]
 
