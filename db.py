@@ -81,6 +81,11 @@ def get_total_esais_male():
     db = get_db()
     return len(list(db['ClinicalTrials'].find({'gender': 'Male'})))
 
+def get_trial_id(id_trial: str):
+    db = get_db()
+    return list(db['ClinicalTrials'].find_one({'id': id_trial}))
+
+
 def get_total_pub():
     db = get_db()
     return len(list(db['Publications'].find({})))
