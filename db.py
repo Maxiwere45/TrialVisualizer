@@ -81,22 +81,27 @@ def get_total_esais_male():
     db = get_db()
     return len(list(db['ClinicalTrials'].find({'gender': 'Male'})))
 
+
 def get_trial_id(id_trial: str):
     db = get_db()
-    return list(db['ClinicalTrials'].find_one({'id': id_trial}))
+    result = list(db['ClinicalTrials'].find({'id': id_trial}))
+    return dict(result[0])
 
 
 def get_total_pub():
     db = get_db()
     return len(list(db['Publications'].find({})))
 
+
 def get_total_pub_essais_rand():
     db = get_db()
     return db['Publications'].count_documents({'p_type': 'p_randtrials'})
 
+
 def get_total_pub_essais_obs():
     db = get_db()
     return db['Publications'].count_documents({'p_type': 'p_obstudies'})
+
 
 def get_top_concepts_by_publication_count():
     db = get_db()
@@ -106,18 +111,21 @@ def get_top_concepts_by_publication_count():
         {"$unwind": "$concepts"},
         {"$group": {"_id": "$concepts", "count": {"$sum": 1}}},
         {"$sort": {"count": -1}}
-      ]
+    ]
     return list(db['Publications'].aggregate(pipeline))
 
-def get_total_articles()->int:
+
+def get_total_articles() -> int:
     db = get_db()
     return len(list(db['Publications'].find({'doctype': 'article'})))
 
-def get_total_preprints()->int:
+
+def get_total_preprints() -> int:
     db = get_db()
     return len(list(db['Publications'].find({'doctype': 'preprint'})))
 
-## STATISTIQUES ESSAIS CLINIQUES
+
+# STATISTIQUES ESSAIS CLINIQUES
 def get_gender_stats():
     db = get_db()
     return list(db.ClinicalTrials.aggregate([
@@ -125,5 +133,5 @@ def get_gender_stats():
              {"_id": "$gender",
               "count": {"$sum": 1}
               }
-        }
+         }
     ]))

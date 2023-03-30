@@ -6,7 +6,6 @@ db = client['trial_visualizer']
 clinicaltrials = db['ClinicalTrials']
 publications = db['Publications']
 
-
 """
 val1 = list(publications.find({'authors':'N/A'},{'_id':0,'id':1,'doi':1}))
 print("Ajout des auteurs aux publications...")
@@ -32,16 +31,6 @@ for i in val1:
         print("Il reste " + str(x) + " publications à traiter...")
 print("Traitement terminé !")
 """
-
-
-
-unique_ids = publications.distinct("id")
-
-# Suppression des doublons
-for uid in unique_ids:
-    docs = list(publications.find({"id": uid}))
-    if len(docs) > 1:
-        docs_to_delete = docs[1:]
-        for doc in docs_to_delete:
-            publications.delete_one({"_id": doc["_id"]})
-            print("Suppression de la publication " + doc["id"] + " effectuée !")
+res = list(db['ClinicalTrials'].find({'id': "ISRCTN10077335"}))
+for i in res[0]['interventions'][0]:
+    print(f"{i} : {res[0]['interventions'][0][i]}")
