@@ -97,14 +97,14 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Detail de la publication {{ trial['id'] }}</h1>
+                <h1 class="mt-4">Detail de la publication {{ pub['id'] }}</h1>
                 <!--Séparateur-->
                 <div class="separator-breadcrumb border-top"></div>
                 <br>
                 <div class="card">
                     <div class="card-header">TITRE</div>
                     <div class="card-body">
-                        <h5 class="card-title">{{ trial['title'] }}</h5>
+                        <h5 class="card-title">{{ pub['title'] }}</h5>
                     </div>
                 </div>
                 <div class="w-100"><p></p></div>
@@ -115,50 +115,31 @@
                             <div class="card-header">DETAILS</div>
                             <div class="card-body">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">ID : {{ trial['id'] }}</li>
-                                    <li class="list-group-item">Registry : {{ trial['registry'] }}</li>
-                                    <li class="list-group-item">Date inserted : {{ trial['dateInserted'] }}</li>
-                                    <li class="list-group-item">Date published : {{ trial['date'] }}</li>
-                                    <li class="list-group-item">Linkout : {{ trial['linkout'] }}</li>
-                                    <li class="list-group-item">Gender : {{ trial['gender'] }}</li>
-                                    <li class="list-group-item">Phase : {{ trial['phase'] }}</li>
-                                    <li class="list-group-item">Acronym : {{ trial['acronym'] }}</li>
+                                    <li class="list-group-item">ID : {{ pub['id'] }}</li>
+                                    <li class="list-group-item">Year : {{ pub['year'] }}</li>
+                                    <li class="list-group-item">Date inserted : {{ pub['dateInserted'] }}</li>
+                                    <li class="list-group-item">Date published : {{ pub['date'] }}</li>
+                                    <li class="list-group-item">Doctype : {{ pub['doctype'] }}</li>
+                                    <li class="list-group-item">Doi : {{ pub['doi'] }}</li>
+                                    <li class="list-group-item">PMID : {{ pub['pmid'] }}</li>
+                                    <li class="list-group-item">Venue : {{ pub['venue'] }}</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <!-- 3rd card -->
+                    <!-- 2Nd card -->
                     <div class="col-md-6 col-lg-4">
                         <div class="card">
-                            <div class="card-header">INTERVENTIONS</div>
+                            <div class="card-header">CONCEPTS</div>
                             <div class="card-body">
-                                {% for i in trial['interventions'][0] %}
-                                    <code>{{ i }}</code> : <i>{{ trial['interventions'][0][i] }}</i>
-                                    <br>
+                                {% for i in trial['concept'] %}
+                                    <code>{{ i }} </code>
                                 {% endfor %}
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4">
-                            <div class="card">
-                                <div class="card-header">CONDITIONS</div>
-                                <div class="card-body">
-                                    {% for element in trial['conditions'] %}
-                                        <code>{{ element }}</code>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="w-100"><p></p></div>
-                    <!-- 4th card -->
-                    <div class="card">
-                        <div class="card-header">ABSTRACT</div>
-                        <div class="card-body">
-                            <p class="card-text">{{ trial['abstract'] }}</p>
-                        </div>
-                    </div>
-                    <div class="w-100"><p></p></div>
+                </div>
             </div>
         </main>
         <footer class="py-4 bg-light mt-auto">

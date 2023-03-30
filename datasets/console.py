@@ -38,10 +38,5 @@ pipeline = [
         {"$sort": {"count": -1}}
     ]
 
-res = list(publications.aggregate(pipeline))
-
-for i in res:
-    for x, y in i.items():
-        print(x, y)
-
-print(type(res))
+res = list(db['Publications'].find({'id': "pub.1127884062"}))
+print(res[0])
