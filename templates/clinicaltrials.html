@@ -182,7 +182,7 @@
                                         <!--CODE-->
                                         {% for document in trials %}
                                             <tr>
-                                                <td><a href="{{ url_for('clinical_trial_page_detail', id=document['id']) }}" target="_blank">{{ document['id'] }}</a></td>
+                                                <td><a href="{{ url_for('clinical_trial_page_detail', id=document['id']) }}" target="_blank" style="text-decoration: none; color: #bb2d3b">{{ document['id'] }}</a></td>
                                                 <td>{{ document['registry'] }}</td>
                                                 <td>{{ document['dateInserted'] }}</td>
                                                 <td>{{ document['date'] }}</td>

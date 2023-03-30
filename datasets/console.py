@@ -31,6 +31,17 @@ for i in val1:
         print("Il reste " + str(x) + " publications à traiter...")
 print("Traitement terminé !")
 """
-res = list(db['ClinicalTrials'].find({'id': "ISRCTN10077335"}))
-for i in res[0]['interventions'][0]:
-    print(f"{i} : {res[0]['interventions'][0][i]}")
+pipeline = [
+        {"$match": {"doctype": "article"}},
+        {"$unwind": "$concepts"},
+        {"$group": {"_id": "$concepts", "count": {"$sum": 1}}},
+        {"$sort": {"count": -1}}
+    ]
+
+res = list(publications.aggregate(pipeline))
+
+for i in res:
+    for x, y in i.items():
+        print(x, y)
+
+print(type(res))

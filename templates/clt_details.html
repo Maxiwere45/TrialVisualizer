@@ -101,6 +101,13 @@
                 <!--Séparateur-->
                 <div class="separator-breadcrumb border-top"></div>
                 <br>
+                <div class="card">
+                    <div class="card-header">TITRE</div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ trial['title'] }}</h5>
+                    </div>
+                </div>
+                <div class="w-100"><p></p></div>
                 <div class="row">
                     <!-- 1st card -->
                     <div class="col-md-6 col-lg-4">
@@ -145,29 +152,13 @@
                     </div>
                     <div class="w-100"><p></p></div>
                     <!-- 4th card -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-header">ABSTRACT</div>
-                            <div class="card-body">
-                                <p class="card-text">{{ trial['abstract'] }}</p>
-                            </div>
+                    <div class="card">
+                        <div class="card-header">ABSTRACT</div>
+                        <div class="card-body">
+                            <p class="card-text">{{ trial['abstract'] }}</p>
                         </div>
                     </div>
-
-                    <!-- 5th card -->
-
-                <div class="row">
-                    <!-- 2nd card -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-header">TITRE</div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{ trial['title'] }}</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                    <div class="w-100"><p></p></div>
             </div>
         </main>
         <footer class="py-4 bg-light mt-auto">
