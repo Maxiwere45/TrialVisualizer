@@ -65,7 +65,7 @@ def create_app(test_config=None):
     @app.route('/detailspub/<string:id>', methods=['GET'])
     def publication_page_detail(id):
         pub = db.get_pub_id(id)
-        return render_template('pub_details.html', app=app, pub=pub)
+        return render_template('pub_detail.html', app=app, pub=pub)
 
 
     @app.route('/doi-search')

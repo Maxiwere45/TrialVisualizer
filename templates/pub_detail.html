@@ -128,14 +128,11 @@
                         </div>
                     </div>
                     <!-- 2Nd card -->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-header">CONCEPTS</div>
-                            <div class="card-body">
-                                {% for i in trial['concept'] %}
-                                    <code>{{ i }} </code>
-                                {% endfor %}
-                            </div>
+                    <div class="w-100"><p></p></div>
+                    <div class="card">
+                        <div class="card-header">CONCEPTS</div>
+                        <div class="card-body">
+                            {% for element in pub['concepts'] %}<code>{{ element }}</code> {% endfor %}
                         </div>
                     </div>
                     <div class="w-100"><p></p></div>

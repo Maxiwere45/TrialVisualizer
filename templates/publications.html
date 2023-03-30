@@ -189,7 +189,11 @@
                                         <!--CODE-->
                                         {% for document in publications %}
                                             <tr>
-                                                <td>{{ document['id'] }}</td>
+                                                <td>
+                                                    <a href="{{ url_for('publication_page_detail', id=document['id']) }}" target="_blank" style="text-decoration: none; color: #bb2d3b">
+                                                        {{ document['id'] }}
+                                                    </a>
+                                                </td>
                                                 <td>{{ document['pmid'] }}</td>
                                                 <td>{{ document['dateInserted'] }}</td>
                                                 <td>{{ document['datePublished'] }}</td>
