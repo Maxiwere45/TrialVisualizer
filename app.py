@@ -121,12 +121,13 @@ def create_app(test_config=None):
     def stats_pub():
         toto_art = db.get_total_articles()
         toto_preprint = db.get_total_preprints()
+        get_top_concept = db.get_top_concepts_by_publication_count(year=2020)
         return render_template(
             'stat_publications.html',
             app=app,
             toto_art=toto_art,
             toto_preprint=toto_preprint,
-            get_top_concept=db.get_top_concepts_by_publication_count()
+            get_top_concept=get_top_concept
         )
 
     @app.route('/stats_clt')

@@ -32,28 +32,10 @@ for i in val1:
         print("Il reste " + str(x) + " publications à traiter...")
 print("Traitement terminé !")
 """
-cursor = publications.find({"published_date": {"$type": "date", "$exists": True}})
+# CI DESSOUS LA FONCTION A TESTER
 
-# Agrégation des données
-pipeline = [
-    {
-        "$group": {
-            "_id": {
-                "venue": "$venue",
-                "year": {"$year": "$published_date"}
-            },
-            "count": {"$sum": 1}
-        }
-    },
-    {
-        "$sort": {
-            "_id.year": 1,
-            "count": -1
-        }
-    }
-]
 
-result = db.Publications.aggregate(pipeline)
+# CI DESSUS L'AFFICHAGE AVEC UN PRINT
 
-for doc in result:
-    print(doc)
+
+
