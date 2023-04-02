@@ -1,4 +1,5 @@
 import pymongo
+from bson import SON
 from flask import g
 
 MONGO_URI = 'mongodb+srv://nrm4206a:9dfe351b@dbsae.ohuhcxc.mongodb.net/?retryWrites=true&w=majority'
@@ -109,13 +110,14 @@ def get_pub_id(id_pub: str):
     return dict(result[0])
 
 
-def get_top_concepts_by_publication_count():
+def get_top_concepts_by_publication_count(year:str):
     db = get_db()
     pipeline = [
         {"$match": {"doctype": "article"}},
         {"$unwind": "$concepts"},
         {"$group": {"_id": "$concepts", "count": {"$sum": 1}}},
-        {"$sort": {"count": -1}}
+        {"$sort": {"count": -1}},
+        {"$match": {"year": year}}
     ]
     return list(db['Publications'].aggregate(pipeline))[0:20]
 
@@ -193,3 +195,24 @@ def get_gender_stats():
               }
          }
     ]))
+
+
+# STATISTIQUES PUBLICATIONS
+def get_revue_abs():
+    db = get_db()
+    pipeline = [
+        {
+            "$group": {
+                "_id": {
+                    "venue": "$venue",
+                    "year": {"$year": "$datePublished"}
+                },
+                "count": {"$sum": 1}
+            }
+        },
+        {
+            "$sort": SON([("_id.year", 1), ("count", -1)])
+        }
+    ]
+    return db['Publications'].aggregate(pipeline, allowDiskUse=True)
+
