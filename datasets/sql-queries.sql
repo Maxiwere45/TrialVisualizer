@@ -103,6 +103,8 @@ db.Publications.find({ $or: [
   { "meshTerms": { $regex: /ivermectin/i } }
 ] })
 
+
+
 // Publications du mois courant (ex mai 2020) avec
 // triées par score altmetric décroissant et
 // départagées par citations décroissantes

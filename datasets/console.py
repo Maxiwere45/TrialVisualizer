@@ -31,12 +31,35 @@ for i in val1:
         print("Il reste " + str(x) + " publications à traiter...")
 print("Traitement terminé !")
 """
-pipeline = [
-        {"$match": {"doctype": "article"}},
-        {"$unwind": "$concepts"},
-        {"$group": {"_id": "$concepts", "count": {"$sum": 1}}},
-        {"$sort": {"count": -1}}
-    ]
 
-res = list(db['Publications'].find({'id': "pub.1127884062"}))
-print(res[0])
+def aggregate_to_dict(query):
+    cursor = db.Publications.aggregate(query)
+    result = []
+    for doc in cursor:
+        id_value = doc['_id']['venue']
+        count_value = doc['count']
+        result.append({'id': id_value, 'count': count_value})
+    return result
+
+query = [
+  {
+    '$group': {
+      '_id': {
+        'venue': '$venue'
+      },
+      'count': {
+        '$sum': 1
+      }
+    }
+  },
+  {
+    '$sort': {
+      '_id.year': 1,
+      'count': -1
+    }
+  }
+]
+
+result = aggregate_to_dict(query)
+print(result)
+

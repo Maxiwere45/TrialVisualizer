@@ -62,7 +62,7 @@ window.onload = function() {
                 }, maxBarThickness: 50 // number (pixels) or 'flex'
             }
         });
-    }, 1500);
+    }, 5500);
 };
 
 

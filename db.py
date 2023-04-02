@@ -119,6 +119,14 @@ def get_top_concepts_by_publication_count():
     ]
     return list(db['Publications'].aggregate(pipeline))[0:20]
 
+def revue_by_count():
+    db = get_db()
+    pipeline = [
+        {"$match": {"doctype": "article"}},
+        {"$group": {"_id": "$journal", "count": {"$sum": 1}}},
+        {"$sort": {"count": -1}}
+    ]
+    return list(db['Publications'].aggregate(pipeline))[0:20]
 
 def get_total_articles() -> int:
     db = get_db()
@@ -128,6 +136,51 @@ def get_total_articles() -> int:
 def get_total_preprints() -> int:
     db = get_db()
     return len(list(db['Publications'].find({'doctype': 'preprint'})))
+
+
+# STATISTIQUES PUBLICATIONS
+def revue_by_abstract_count():
+    query = [
+        {
+            '$group': {
+                '_id': {
+                    'venue': '$venue'
+                },
+                'count': {
+                    '$sum': 1
+                }
+            }
+        },
+        {
+            '$sort': {
+                '_id.year': 1,
+                'count': -1
+            }
+        }
+    ]
+    db = get_db()
+    cursor = db['Publications'].aggregate(query)
+    result = []
+    for doc in cursor:
+        id_value = doc['_id']['venue']
+        count_value = doc['count']
+        result.append({'id': id_value, 'count': count_value})
+    return result[0:100]
+
+def get_clinical_trials_by_arm_group_labels():
+    db = get_db()
+    pipeline = [
+        {"$unwind": "$interventions"},
+        {
+            "$group": {
+                "_id": "$interventions.arm_group_labels",
+                "count": {"$sum": 1}
+            }
+        },
+        {"$sort": {"count": -1}}
+    ]
+    result = db.ClinicalTrials.aggregate(pipeline)
+    return [{"id": item["_id"], "count": item["count"]} for item in result]
 
 
 # STATISTIQUES ESSAIS CLINIQUES
