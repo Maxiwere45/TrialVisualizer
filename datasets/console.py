@@ -33,7 +33,38 @@ for i in val1:
 print("Traitement terminé !")
 """
 # CI DESSOUS LA FONCTION A TESTER
+def get_publications_by_venue_and_year():
+    pipeline = [
+        {"$match": {"datePublished": {"$ne": ""}}},
+        {
+            "$group": {
+                "_id": {
+                    "venue": "$venue",
+                    "year": {
+                        "$year": {
+                            "$toDate": "$datePublished"
+                        }
+                    }
+                },
+                "count": {"$sum": 1}
+            }
+        },
+        {
+            "$sort": {
+                "_id.year": 1,
+                "count": -1
+            }
+        }
+    ]
+    result =  list(publications.aggregate(pipeline))
+    list_venue = []
+    for doc in result:
+        list_venue.append(dict(doc['_id'], **{'count': doc['count']}))
+    return list_venue
+    # return {f"{doc['_id']['venue']}": doc['count'] for doc in result}
 
+for doc in get_publications_by_venue_and_year():
+    print(doc['venue'], doc['year'], doc['count'])
 
 # CI DESSUS L'AFFICHAGE AVEC UN PRINT
 

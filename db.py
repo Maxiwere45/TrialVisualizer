@@ -4,8 +4,6 @@ import pymongo
 from bson import SON
 from flask import g
 
-from datasets.console import db
-
 MONGO_URI = 'mongodb+srv://nrm4206a:9dfe351b@dbsae.ohuhcxc.mongodb.net/?retryWrites=true&w=majority'
 
 
@@ -18,32 +16,32 @@ def get_db():
 
 def get_trial():
     db = get_db()
-    return list(db['ClinicalTrials'].find().limit(1300))
+    return list(db['ClinicalTrials'].find())
 
 
 def get_trial_obstudies():
     db = get_db()
-    return list(db['ClinicalTrials'].find({'trial_type': 'cl_obstudies'}).limit(1300))
+    return list(db['ClinicalTrials'].find({'trial_type': 'cl_obstudies'}))
 
 
 def get_trial_randtrials():
     db = get_db()
-    return list(db['ClinicalTrials'].find({'trial_type': 'cl_randtrials'}).limit(1300))
+    return list(db['ClinicalTrials'].find({'trial_type': 'cl_randtrials'}))
 
 
 def get_publication():
     db = get_db()
-    return list(db['Publications'].find().limit(1300))
+    return list(db['Publications'].find().limit(2000))
 
 
 def get_publication_obstudies():
     db = get_db()
-    return list(db['Publications'].find({'p_type': 'p_obstudies'}).limit(1300))
+    return list(db['Publications'].find({'p_type': 'p_obstudies'}))
 
 
 def get_publication_randtrials():
     db = get_db()
-    return list(db['Publications'].find({'p_type': 'p_randtrials'}).limit(1300))
+    return list(db['Publications'].find({'p_type': 'p_randtrials'}))
 
 
 # Nombre d'essais en phase 1 / 2 / 3 / 4
@@ -202,23 +200,35 @@ def get_gender_stats():
 
 
 # STATISTIQUES PUBLICATIONS
-def get_revue_abs():
+def get_publications_by_venue_and_year():
     db = get_db()
     pipeline = [
+        {"$match": {"datePublished": {"$ne": ""}}},
         {
             "$group": {
                 "_id": {
                     "venue": "$venue",
-                    "year": {"$year": "$datePublished"}
+                    "year": {
+                        "$year": {
+                            "$toDate": "$datePublished"
+                        }
+                    }
                 },
                 "count": {"$sum": 1}
             }
         },
         {
-            "$sort": SON([("_id.year", 1), ("count", -1)])
+            "$sort": {
+                "_id.year": 1,
+                "count": -1
+            }
         }
     ]
-    return db['Publications'].aggregate(pipeline, allowDiskUse=True)
+    result =  list(db.Publications.aggregate(pipeline))
+    list_venue = []
+    for doc in result:
+        list_venue.append(dict(doc['_id'], **{'count': doc['count']}))
+    return list_venue
 
 def get_current_month_publications():
   current_date = datetime.utcnow()

@@ -131,7 +131,7 @@
                         Concept les plus fréquents hors période preprint
                     </div>
                     <div class="card-body">
-                        <table id="datatablesSimple">
+                        <table class="datatablesSimple">
                             <thead>
                             <tr>
                                 <th>Concept</th>
@@ -165,7 +165,7 @@
                         Revue publiant le plus d'abstracts
                     </div>
                     <div class="card-body">
-                        <table id="datatablesSimple">
+                        <table class="datatablesSimple">
                             <thead>
                             <tr>
                                 <th>Venue</th>
@@ -180,10 +180,10 @@
                             </tfoot>
                             <tbody>
                             <!--CODE JINJA2-->
-                            {% for element in get_revue_by_count %}
+                            {% for element in venue_count %}
                                 <tr>
-                                    <td>{{ element['id'] }}</td>
-                                    <td>{{ element["count"] }}</td>
+                                    <td>{{ element['venue'] }}</td>
+                                    <td>{{ element['count'] }}</td>
                                 </tr>
                             {% endfor %}
                             <!--CODE JINJA2-->

@@ -153,10 +153,7 @@
                                             <th>Link out</th>
                                             <th>Gender</th>
                                             <th id="cd-clt">Conditions</th>
-                                            <th>Interventions</th>
                                             <th>Acronym</th>
-                                            <th>Title</th>
-                                            <th>Abstract</th>
                                             <th>Phase</th>
                                             <th>Type</th>
                                         </tr>
@@ -170,10 +167,7 @@
                                             <th>Link out</th>
                                             <th>Gender</th>
                                             <th>Conditions</th>
-                                            <th>Interventions</th>
                                             <th>Acronym</th>
-                                            <th>Title</th>
-                                            <th>Abstract</th>
                                             <th>Phase</th>
                                             <th>Type</th>
                                         </tr>
@@ -189,10 +183,7 @@
                                                 <td><a href="{{ document['linkout'] }}" target="_blank">{{ document['linkout'] }}</a></td>
                                                 <td>{{ document['gender'] }}</td>
                                                 <td>{% for element in document['conditions'] %}<code>{{ element }}</code> {% endfor %}</td>
-                                                <td>{{ document['interventions'] }}</td>
                                                 <td>{{ document['acronym'] }}</td>
-                                                <td>{{ document['title'] }}</td>
-                                                <td>{{ document['abstract'] }}</td>
                                                 <td>{{ document['phase'] }}</td>
                                                 <td>{{ document['trial_type'] }}</td>
                                             </tr>
@@ -200,9 +191,6 @@
                                         {% block content %}{% endblock %}
                                         <!--CODE-->
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
