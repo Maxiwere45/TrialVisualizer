@@ -1,4 +1,5 @@
 import pymongo
+from bson import SON
 
 MONGO_URI = 'mongodb+srv://nrm4206a:9dfe351b@dbsae.ohuhcxc.mongodb.net/?retryWrites=true&w=majority'
 client = pymongo.MongoClient(MONGO_URI)
@@ -31,35 +32,10 @@ for i in val1:
         print("Il reste " + str(x) + " publications à traiter...")
 print("Traitement terminé !")
 """
+# CI DESSOUS LA FONCTION A TESTER
 
-def aggregate_to_dict(query):
-    cursor = db.Publications.aggregate(query)
-    result = []
-    for doc in cursor:
-        id_value = doc['_id']['venue']
-        count_value = doc['count']
-        result.append({'id': id_value, 'count': count_value})
-    return result
 
-query = [
-  {
-    '$group': {
-      '_id': {
-        'venue': '$venue'
-      },
-      'count': {
-        '$sum': 1
-      }
-    }
-  },
-  {
-    '$sort': {
-      '_id.year': 1,
-      'count': -1
-    }
-  }
-]
+# CI DESSUS L'AFFICHAGE AVEC UN PRINT
 
-result = aggregate_to_dict(query)
-print(result)
+
 

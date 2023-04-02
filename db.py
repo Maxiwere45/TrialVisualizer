@@ -1,6 +1,10 @@
+from datetime import datetime, timedelta
+
 import pymongo
 from bson import SON
 from flask import g
+
+from datasets.console import db
 
 MONGO_URI = 'mongodb+srv://nrm4206a:9dfe351b@dbsae.ohuhcxc.mongodb.net/?retryWrites=true&w=majority'
 
@@ -216,3 +220,15 @@ def get_revue_abs():
     ]
     return db['Publications'].aggregate(pipeline, allowDiskUse=True)
 
+def get_current_month_publications():
+  current_date = datetime.utcnow()
+  start_of_month = current_date.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+  end_of_month = (start_of_month + timedelta(days=32)).replace(day=1) - timedelta(seconds=1)
+  query = {
+    "datePublished": {
+      "$gte": start_of_month,
+      "$lte": end_of_month
+    }
+  }
+  sort = [("altmetric", -1), ("timesCited", -1)]
+  return list(db.Publications.find(query).sort(sort))
