@@ -1,8 +1,9 @@
-# Les membres du groupe 9 sont :
+# Les membres du groupe 9 sont :  
 
-  Amdjad Anrifou 
-  Guiseppin Léo
-  Virgile Caujolle
-  Rayan Kachtiane
-  Amina MADI
+
+    Amdjad Anrifou  
+    Guiseppin Léo  
+    Virgile Caujolle  
+    Rayan Kachtiane  
+    Amina MADI
   
